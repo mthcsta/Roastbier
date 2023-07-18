@@ -138,7 +138,7 @@ function validar() {
 
     // Se a página foi validada com sucesso, muda para a página de resultados.
     if (retorno) {
-      window.location.href = '../results.html';
+      window.location.pathname += '/../results.html';
       return false;
 
     }else{
