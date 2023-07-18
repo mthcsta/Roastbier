@@ -13,8 +13,8 @@ $(document).ready(function() {
             success: function(data) {
                 if (data.success == 1) {
                     redirect('/');
+                    return;
                 }
-
                 $("#form_login_message").removeClass("d-none").html(data.message);
             }
         });
