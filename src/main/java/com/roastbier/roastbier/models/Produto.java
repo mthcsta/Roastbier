@@ -6,92 +6,64 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class Produto {
-    private String cpf;
+    private int id = -1;
     private String nome;
-    private LocalDate dataNascimento;
-    private String email;
-    private String telefone;
-    private Boolean whats;
-    private String usuario;
-    private String senha;
+    private String descricao;
+    private String unidade;
+    private float precoUnitario;
 
-    public Produto(String cpf, String nome, LocalDate dataNascimento, String email, String telefone, Boolean whats, String usuario, String senha) {
-        this.cpf = cpf;
+    public Produto(int id, String nome, String descricao, String unidade, float precoUnitario) {
+        this.id = id;
         this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.email = email;
-        this.telefone = telefone;
-        this.whats = whats;
-        this.usuario = usuario;
-        this.senha = senha;
+        this.descricao = descricao;
+        this.unidade = unidade;
+        this.precoUnitario = precoUnitario;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+     // Getters
+     public int getId() {
+        return id;
     }
 
     public String getNome() {
         return nome;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public float getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public Boolean getWhats() {
-        return whats;
-    }
-
-    public void setWhats(Boolean whats) {
-        this.whats = whats;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPrecoUnitario(float precoUnitario) {
+        this.precoUnitario = precoUnitario;
     }
 
     public void salvar() {
-        if (this.cpf == null) {
+        if (this.id == -1) {
             novo();
             return;
         }
@@ -104,18 +76,14 @@ public class Produto {
         try {
             conexao = new Conexao().getConexao();
 
-            preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
-                    + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
+            preparedStatement = conexao.prepareStatement("INSERT INTO `produtos` "
+                    + "(id, nome, descricao, unidade, preco_unitario)"
+                    + "VALUES (?, ?, ?, ?)");
 
-            preparedStatement.setString(1, this.cpf);
-            preparedStatement.setString(2, this.nome);
-            preparedStatement.setDate(3, Date.valueOf(this.dataNascimento));
-            preparedStatement.setString(4, this.email);
-            preparedStatement.setString(5, this.telefone);
-            preparedStatement.setBoolean(6, this.whats);
-            preparedStatement.setString(7, this.usuario);
-            preparedStatement.setString(8, this.senha);
+            preparedStatement.setString(1, this.nome);
+            preparedStatement.setString(2, this.descricao);
+            preparedStatement.setString(3, this.unidade);
+            preparedStatement.setFloat(4, this.precoUnitario);
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -140,18 +108,15 @@ public class Produto {
         try {
             conexao = new Conexao().getConexao();
 
-            preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
-                    + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
-                    + "WHERE cpf = ?");
+            preparedStatement = conexao.prepareStatement("UPDATE `produtos` "
+                    + "SET nome = ?, descricao = ?, unidade = ?, preco_unitario = ? "
+                    + "WHERE id = ?");
 
             preparedStatement.setString(1, this.nome);
-            preparedStatement.setDate(2, Date.valueOf(this.dataNascimento));
-            preparedStatement.setString(3, this.email);
-            preparedStatement.setString(4, this.telefone);
-            preparedStatement.setBoolean(5, this.whats);
-            preparedStatement.setString(6, this.usuario);
-            preparedStatement.setString(7, this.senha);
-            preparedStatement.setString(8, this.cpf);
+            preparedStatement.setString(2, this.descricao);
+            preparedStatement.setString(3, this.unidade);
+            preparedStatement.setFloat(4, this.precoUnitario);
+            preparedStatement.setInt(5, this.id);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

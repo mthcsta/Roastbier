@@ -6,116 +6,77 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class Pedido {
-    private String cpf;
-    private String nome;
-    private LocalDate dataNascimento;
-    private String email;
-    private String telefone;
-    private Boolean whats;
-    private String usuario;
-    private String senha;
+    private int numero;
+    private LocalDate dataEmissao;
+    private LocalDate dataEntrega;
+    private Float valorFrete;
+    private int clienteId;
 
-    public Pedido(String cpf, String nome, LocalDate dataNascimento, String email, String telefone, Boolean whats, String usuario, String senha) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.email = email;
-        this.telefone = telefone;
-        this.whats = whats;
-        this.usuario = usuario;
-        this.senha = senha;
+    public Pedido(int numero, LocalDate dataEmissao, LocalDate dataEntrega, Float valorFrete, int clienteId) {
+        this.numero = numero;
+        this.dataEmissao = dataEmissao;
+        this.dataEntrega = dataEntrega;
+        this.valorFrete = valorFrete;
+        this.clienteId = clienteId;
     }
 
-    public String getCpf() {
-        return cpf;
+     // Getters
+     public int getNumero() {
+        return numero;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public LocalDate getDataEmissao() {
+        return dataEmissao;
     }
 
-    public String getNome() {
-        return nome;
+    public LocalDate getDataEntrega() {
+        return dataEntrega;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Float getValorFrete() {
+        return valorFrete;
     }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
+    public int getClienteId() {
+        return clienteId;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    // Setters
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public String getEmail() {
-        return email;
+    public void setDataEmissao(LocalDate dataEmissao) {
+        this.dataEmissao = dataEmissao;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDataEntrega(LocalDate dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public void setValorFrete(Float valorFrete) {
+        this.valorFrete = valorFrete;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setClienteId(int clienteId) {
+        this.clienteId = clienteId;
     }
 
-    public Boolean getWhats() {
-        return whats;
-    }
-
-    public void setWhats(Boolean whats) {
-        this.whats = whats;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public void salvar() {
-        if (this.cpf == null) {
-            novo();
-            return;
-        }
-        atualizar();
-    }
-
+    
     public void novo() {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
             conexao = new Conexao().getConexao();
 
-            preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
-                    + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
+            preparedStatement = conexao.prepareStatement("INSERT INTO `pedidos` "
+                    + "(data_emissao, data_entrega, valor_frete, cliente_id)"
+                    + "VALUES (?, ?, ?, ?)");
 
-            preparedStatement.setString(1, this.cpf);
-            preparedStatement.setString(2, this.nome);
-            preparedStatement.setDate(3, Date.valueOf(this.dataNascimento));
-            preparedStatement.setString(4, this.email);
-            preparedStatement.setString(5, this.telefone);
-            preparedStatement.setBoolean(6, this.whats);
-            preparedStatement.setString(7, this.usuario);
-            preparedStatement.setString(8, this.senha);
+            preparedStatement.setDate(1, Date.valueOf(this.dataEmissao));
+            preparedStatement.setDate(2, Date.valueOf(this.dataEntrega));
+            preparedStatement.setFloat(3, this.valorFrete);
+            preparedStatement.setInt(4, this.clienteId);
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -140,20 +101,19 @@ public class Pedido {
         try {
             conexao = new Conexao().getConexao();
 
-            preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
-                    + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
-                    + "WHERE cpf = ?");
+            preparedStatement = conexao.prepareStatement("UPDATE `pedidos` "
+            + "SET numero = ?, data_emissao = ?, data_entrega = ?, valor_frete = ?, cliente_id = ? "
+            + "WHERE numero = ?");
 
-            preparedStatement.setString(1, this.nome);
-            preparedStatement.setDate(2, Date.valueOf(this.dataNascimento));
-            preparedStatement.setString(3, this.email);
-            preparedStatement.setString(4, this.telefone);
-            preparedStatement.setBoolean(5, this.whats);
-            preparedStatement.setString(6, this.usuario);
-            preparedStatement.setString(7, this.senha);
-            preparedStatement.setString(8, this.cpf);
+            preparedStatement.setDate(1, Date.valueOf(this.dataEmissao));
+            preparedStatement.setDate(2, Date.valueOf(this.dataEntrega));
+            preparedStatement.setFloat(3, this.valorFrete);
+            preparedStatement.setInt(4, this.clienteId);
+            preparedStatement.setInt(5, this.numero);
 
-            preparedStatement.executeUpdate();
+
+
+    preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
