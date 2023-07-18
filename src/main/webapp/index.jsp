@@ -2,36 +2,14 @@
 <%@ include file="partials/header.jsp" %>
 <div class="all-content-container">
 
-    <nav class="custom-navbar">
-        <a class="navbar-brand" href="index.html">
-            <img src="src/img/banner.png" alt="rosatbeer banner"/>
-        </a>
-    </nav>
+    <!-- Top Menu -->
+    <%@ include file="partials/menubar.jsp" %>
 
     <div class="container-fluid">
         <div class="row">
 
             <!-- Sidebar Menu -->
-            <aside class="col-12 col-md-2 py-2 sidebar-left">
-                <div class="sidebar-sticky">
-
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html">
-                                <img src="src/img/beericon.png" alt="Icon" class="icon">
-                                About
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="search.html">
-                                <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                                Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
-
+            <%@ include file="partials/sidebar.jsp" %>
 
             <!-- Main Content -->
             <main role="main" class="col-md-8 bg-roastbier-main">
@@ -62,30 +40,8 @@
                 </div>
             </main>
 
-            <aside class="col-md-2 py-2 sidebar-right">
-                <div class="sidebar-sticky">
-
-                    <h4>Beer Types</h4>
-                    <hr>
-                    <ul>
-                        <li>Pilsner</li>
-                        <li>Sour</li>
-                        <li>Hefeweizen</li>
-                        <li>APA</li>
-                        <li>IPA</li>
-                        <li>Stout</li>
-                        <li>Witbier</li>
-                        <li>Saison</li>
-                    </ul>
-
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="https://www.clubedomalte.com.br/?aspxerrorpath=/produto/acx%7B%7B98991*97996%7D%7Dxca-2017-375ml-87878&gclid=Cj0KCQjw4NujBhC5ARIsAF4Iv6cJcPKDVKHMx3wUff1bZvJLTb17uoDnkybxWqwK1t1FW7KvIDlgC98aAl1GEALw_wcB">Buy Here</a>
-                        </li>
-                    </ul>
-
-                </div>
-            </aside>
+            <!-- Market Menu -->
+            <%@ include file="partials/buy.jsp" %>
 
         </div>
     </div>
