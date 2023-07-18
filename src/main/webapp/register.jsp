@@ -15,22 +15,28 @@
                 <div class="container">
                     <br>
                     <h1>
-                        request.getParameter("title");
+                        <%=request.getParameter("form")%> Register
                     </h1>
                     <hr>
                     <div class="box">
-                        <%
-                            switch(request.getParameter("form")){
-                                case "user" -> @ include file="form/user.jsp"; 
-                                case "client" -> @ include file="form/client.jsp"; 
-                                case "product" -> @ include file="form/product.jsp";
-                                case "order" -> @ include file="form/order.jsp";
-                                default -> {
-                                    @ include file="error.jsp";
-                                }
-                            }
+                        <% switch (request.getParameter("form")) {
+                                case "user":
+                                    %><%@ include file="form_register/user.jsp" %><%
+                                break;
+                                case "client":
+                                    %><%@ include file="form_register/client.jsp" %><%
+                                break;
+                                case "product":
+                                    %><%@ include file="form_register/product.jsp" %><%
+                                break;
+                                case "order":
+                                    %><%@ include file="form_register/order.jsp" %><%
+                                break;
+                                default:
+                                    %><%@ include file="form_register/error.jsp" %><%
+                                break;
+                        }
                         %>
-
                     </div>
                 </div>
             </main>
