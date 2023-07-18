@@ -2,16 +2,14 @@
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
-    <!--"required" foram removidos dos elementos html para poder haver teste da validação por javascript-->
-
     <div>
-        <label for="nome">Name:</label>
-        <input type="text" id="nome" name="nome" maxlength="100">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" maxlength="11" required>
     </div>
     <br>
     <div>
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" maxlength="15">
+        <label for="nome">Name:</label>
+        <input type="text" id="nome" name="nome" maxlength="100" required>
     </div>
     <br>
     <div>
@@ -20,47 +18,30 @@
     </div>
     <br>
     <div>
-        <label for="endereco">Address:</label>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+    </div>
+    <br>
+    <div>
+        <label for="telefone">Phone:</label>
         <br>
-        <textarea id="endereco" name="endereco" maxlength="255"></textarea>
+        <textarea id="telefone" name="telefone" maxlength="13"></textarea>
     </div>
     <br>
     <div>
-        <label for="estado">State:</label>
-        <select id="estado" name="estado" >
-
-            <option value="" selected="selected" disabled="disabled">Select an option</option>
-
-        </select>
+        <label for="whats">WhatsApp:</label>
+        <input type="checkbox" id="whats" name="whats" value="1">
     </div>
     <br>
     <div>
-        <label>Gender:</label>
-        <label><input type="radio" name="genero" value="masculino" > Male</label>
-        <label><input type="radio" name="genero" value="feminino" > Female</label>
-        <br>
-        <label><input type="radio" name="genero" value="outro" > Other</label>
-        <input type="text" id="outroGenero" name="outroGenero" maxlength="30" placeholder="Other">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" maxlength="15" required>
     </div>
     <br>
     <div>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" maxlength="200">
+        <label for="senha">Password:</label>
+        <input type="text" id="senha" name="senha" maxlength="255" required>
     </div>
     <br>
-    <div>
-        <label>Preferências:</label>
-        <label><input type="checkbox" name="preferencias" value="esportes"> Sports</label>
-        <label><input type="checkbox" name="preferencias" value="cinema"> Cinema</label>
-        <label><input type="checkbox" name="preferencias" value="teatro"> Theater</label>
-        <label><input type="checkbox" name="preferencias" value="música"> Music</label>
-        <label><input type="checkbox" name="preferencias" value="educação"> Education</label>
-        <label><input type="checkbox" name="preferencias" value="cultura"> Culture</label>
-        <label><input type="checkbox" name="preferencias" value="tecnologia"> Technology</label>
-    </div>
-    <div>
-        <button type="submit" class="btnSubmit">Save</button>
-        <button type="reset" class="btnCancel">Cancel</button>
-    </div>
 </form>
-<script src="src/scripts/user/register.js" language="javascript" type="text/javascript"></script>
+<script src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>

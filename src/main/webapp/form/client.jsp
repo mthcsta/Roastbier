@@ -2,16 +2,9 @@
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
-    <!--"required" foram removidos dos elementos html para poder haver teste da validação por javascript-->
-
     <div>
         <label for="nome">Name:</label>
-        <input type="text" id="nome" name="nome" maxlength="100">
-    </div>
-    <br>
-    <div>
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" maxlength="15">
+        <input type="text" id="nome" name="nome" maxlength="100" required>
     </div>
     <br>
     <div>
@@ -20,47 +13,60 @@
     </div>
     <br>
     <div>
-        <label for="endereco">Address:</label>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" maxlength="11" required>
+    </div>
+    <br>
+    <div>
+        <label for="rg">RG:</label>
+        <input type="text" id="rg" name="rg" maxlength="15" required>
+    </div>
+    <br>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+    </div>
+    <br>
+    <div>
+        <label for="telefone">Phone:</label>
         <br>
-        <textarea id="endereco" name="endereco" maxlength="255"></textarea>
+        <textarea id="telefone" name="telefone" maxlength="13"></textarea>
+    </div>
+    <br>
+    <div>
+        <label for="whats">WhatsApp:</label>
+        <input type="checkbox" id="whats" name="whats" value="1">
+    </div>
+    <br>
+    <div>
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" maxlength="8" onblur="viaCep()">
+    </div>
+    <br>
+    <div>
+        <label for="logradouro">Public Place:</label>
+        <input type="text" id="logradouro" name="logradouro" maxlength="200">
+    </div>
+    <br>
+    <div>
+        <label for="numero">Number:</label>
+        <input type="number" id="numero" name="numero" maxlength="20">
+    </div>
+    <br>
+    <div>
+        <label for="bairro">Neighborhood:</label>
+        <input type="number" id="bairro" name="bairro" maxlength="100">
+    </div>
+    <br>
+    <div>
+        <label for="cidade">City:</label>
+        <input type="number" id="cidade" name="cidade" maxlength="100">
     </div>
     <br>
     <div>
         <label for="estado">State:</label>
-        <select id="estado" name="estado" >
-
-            <option value="" selected="selected" disabled="disabled">Select an option</option>
-
-        </select>
+        <input type="number" id="estado" name="estado" maxlength="2">
     </div>
     <br>
-    <div>
-        <label>Gender:</label>
-        <label><input type="radio" name="genero" value="masculino" > Male</label>
-        <label><input type="radio" name="genero" value="feminino" > Female</label>
-        <br>
-        <label><input type="radio" name="genero" value="outro" > Other</label>
-        <input type="text" id="outroGenero" name="outroGenero" maxlength="30" placeholder="Other">
-    </div>
-    <br>
-    <div>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" maxlength="200">
-    </div>
-    <br>
-    <div>
-        <label>Preferências:</label>
-        <label><input type="checkbox" name="preferencias" value="esportes"> Sports</label>
-        <label><input type="checkbox" name="preferencias" value="cinema"> Cinema</label>
-        <label><input type="checkbox" name="preferencias" value="teatro"> Theater</label>
-        <label><input type="checkbox" name="preferencias" value="música"> Music</label>
-        <label><input type="checkbox" name="preferencias" value="educação"> Education</label>
-        <label><input type="checkbox" name="preferencias" value="cultura"> Culture</label>
-        <label><input type="checkbox" name="preferencias" value="tecnologia"> Technology</label>
-    </div>
-    <div>
-        <button type="submit" class="btnSubmit">Save</button>
-        <button type="reset" class="btnCancel">Cancel</button>
-    </div>
 </form>
-<script src="src/scripts/user/register.js" language="javascript" type="text/javascript"></script>
+<script src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>
