@@ -1,4 +1,4 @@
-package com.roastbier.roastbier.controllers.Auth;
+package com.roastbier.roastbier.controllers;
 
 import com.roastbier.roastbier.models.Usuario;
 import org.codehaus.jackson.map.util.JSONPObject;
@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "LoginControllerServlet", value = "/auth/login")
+@WebServlet(name = "LoginControllerServlet", value = "/login")
 public class LoginControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

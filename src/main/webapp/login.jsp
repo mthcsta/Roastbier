@@ -19,7 +19,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="../src/style/signin.css">
+    <link rel="stylesheet" href="src/style/signin.css">
 
     <script>
         const BASE_URL = "<%=System.getProperty("BASE_URL")%>";
@@ -31,7 +31,7 @@
 <main class="form-signin">
     <form method="post" id="form_login">
         <div class="bg-warning d-inline-block mb-4 p-3 border border-1 rounded" style="">
-            <img class="" src="../src/img/beericon.png" alt="" width="57" height="57">
+            <img class="" src="src/img/beericon.png" alt="" width="57" height="57">
         </div>
 
         <h1 class="h3 mb-3 fw-normal">Conectar</h1>
@@ -55,7 +55,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="<%=System.getProperty("BASE_URL")%>/src/scripts/helpers.js"></script>
-
 <script src="<%=System.getProperty("BASE_URL")%>/src/scripts/auth/login.js"></script>
 
 </body>

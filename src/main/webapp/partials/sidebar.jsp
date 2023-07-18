@@ -37,6 +37,24 @@
                     Orders
                 </a>
             </li>
+            <%
+                if (request.getSession().getAttribute("cpf") == null) {
+            %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/login">
+                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
+                    Sign In
+                </a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/logout">
+                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
+                    Logout
+                </a>
+            </li>
+            <% } %>
+
         </ul>
     </div>
 </aside>

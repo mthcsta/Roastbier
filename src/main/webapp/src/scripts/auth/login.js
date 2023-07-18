@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 
         $.ajax({
-            url: url_path('/auth/login'),
+            url: url_path('/login'),
             dataType: 'json',
             type: 'POST',
             data: $(this).serialize(),
