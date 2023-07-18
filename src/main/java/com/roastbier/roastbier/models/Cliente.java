@@ -4,6 +4,8 @@ import com.roastbier.roastbier.Conexao;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente {
     private int id = -1;
@@ -274,5 +276,36 @@ public class Cliente {
                 e.printStackTrace();
             }
         }
+    }
+
+    public Cliente[] listar() throws SQLException {
+        
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Cliente> lista = new ArrayList();
+        
+        try {
+            conexao = new Conexao().getConexao();   
+            preparedStatement = conexao.prepareStatement("select id, nome, data_nascimento, cpf, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep from Clientes");
+            
+            rs = preparedStatement.executeQuery();
+            
+            while (rs.next()) {
+                Cliente c = new Cliente();
+                c.setCodigoBarras(rs.getString("codigo_barras"));
+                  
+                lista.add(c);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            preparedStatement.close();
+            conexao.close();
+        }
+        
+        return lista.toArray(new Cliente[0]);
+        
     }
 }
