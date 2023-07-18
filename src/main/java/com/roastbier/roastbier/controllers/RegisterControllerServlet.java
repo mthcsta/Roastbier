@@ -1,7 +1,5 @@
 package com.roastbier.roastbier.controllers;
 
-import com.roastbier.roastbier.facades.HashFacade;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -18,14 +16,6 @@ public class RegisterControllerServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            response.getWriter().print(
-                    HashFacade.gerarHash("hehehe")
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
         /*
