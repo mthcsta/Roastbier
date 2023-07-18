@@ -1,7 +1,6 @@
 package com.roastbier.roastbier.controllers;
 
 import com.roastbier.roastbier.facades.HashFacade;
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
