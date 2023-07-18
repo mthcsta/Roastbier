@@ -6,7 +6,29 @@
             <li class="nav-item">
                 <a class="nav-link active" href="index.html">
                     <img src="src/img/beericon.png" alt="Icon" class="icon">
-                    About
+                    Home
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="search.html">
+                    <!--
+                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
+                    -->
+                    <i class="fa-solid fa-magnifying-glass icon" alt="Icon"></i>
+                    Search
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="search.html">
+                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
+                    Search
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="search.html">
+                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
+                    Search
                 </a>
             </li>
             <li class="nav-item">
