@@ -32,51 +32,9 @@
                                 <button class="btn-delete">Delete</button>
                             </div>
 
+                            <!-- Tabela DataTable-->
                             <table style="margin-top: 20px;">
-                                <thead>
-                                <tr>
-                                    <th>Seleção</th>
-                                    <th>Coluna 1</th>
-                                    <th>Coluna 2</th>
-                                    <th>Coluna 3</th>
-                                    <th>Coluna 4</th>
-                                    <th>Coluna 5</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><input type="checkbox" style="margin-left: 5px;"></td>
-                                    <td>Valor 1</td>
-                                    <td>Valor 2</td>
-                                    <td>Valor 3</td>
-                                    <td>Valor 4</td>
-                                    <td>Valor 5</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" style="margin-left: 5px;"></td>
-                                    <td>Valor 1</td>
-                                    <td>Valor 2</td>
-                                    <td>Valor 3</td>
-                                    <td>Valor 4</td>
-                                    <td>Valor 5</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" style="margin-left: 5px;"></td>
-                                    <td>Valor 1</td>
-                                    <td>Valor 2</td>
-                                    <td>Valor 3</td>
-                                    <td>Valor 4</td>
-                                    <td>Valor 5</td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" style="margin-left: 5px;"></td>
-                                    <td>Valor 1</td>
-                                    <td>Valor 2</td>
-                                    <td>Valor 3</td>
-                                    <td>Valor 4</td>
-                                    <td>Valor 5</td>
-                                </tr>
-                                </tbody>
+                            
                             </table>
 
                         </div>
