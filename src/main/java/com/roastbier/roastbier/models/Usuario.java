@@ -169,4 +169,41 @@ public class Usuario {
             }
         }
     }
+
+    public static String autenticar(String usuario, String senha) {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            conexao = new Conexao().getConexao();
+
+            preparedStatement = conexao.prepareStatement("SELECT cpf FROM usuarios WHERE Username = ? AND Senha = md5(?)");
+
+            preparedStatement.setString(1, usuario);
+            preparedStatement.setString(2, (senha));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (!resultSet.next()) {
+                return null;
+            }
+
+            return resultSet.getString(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
 }
