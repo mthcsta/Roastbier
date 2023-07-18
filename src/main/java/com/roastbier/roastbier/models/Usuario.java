@@ -1,7 +1,6 @@
 package com.roastbier.roastbier.models;
 
 import com.roastbier.roastbier.Conexao;
-import com.roastbier.roastbier.facades.HashFacade;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -24,7 +23,7 @@ public class Usuario {
         this.telefone = telefone;
         this.whats = whats;
         this.usuario = usuario;
-        this.senha = HashFacade.gerarHash(senha);
+        this.senha = senha;
     }
 
     public String getCpf() {
@@ -88,7 +87,7 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        this.senha = HashFacade.gerarHash(senha);
+        this.senha = senha;
     }
 
     public void salvar() {
@@ -107,7 +106,7 @@ public class Usuario {
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
                     + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
 
             preparedStatement.setString(1, this.cpf);
             preparedStatement.setString(2, this.nome);
@@ -142,7 +141,7 @@ public class Usuario {
             conexao = new Conexao().getConexao();
 
             preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
-                    + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = ?"
+                    + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
                     + "WHERE cpf = ?");
 
             preparedStatement.setString(1, this.nome);
@@ -170,13 +169,4 @@ public class Usuario {
             }
         }
     }
-
-    public boolean compararSenha(String senha) {
-        return HashFacade.compare(senha, this.senha);
-    }
-
-    public boolean compararSenha(String senhaCrua, String senhaHash) {
-        return HashFacade.compare(senhaCrua, senhaHash);
-    }
-
 }
