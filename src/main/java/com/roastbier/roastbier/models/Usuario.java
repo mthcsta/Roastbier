@@ -1,6 +1,7 @@
 package com.roastbier.roastbier.models;
 
 import com.roastbier.roastbier.Conexao;
+import com.roastbier.roastbier.facades.HashFacade;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class Usuario {
         this.telefone = telefone;
         this.whats = whats;
         this.usuario = usuario;
-        this.senha = senha;
+        this.senha = HashFacade.gerarHash(senha);
     }
 
     public String getCpf() {
@@ -87,7 +88,7 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha = HashFacade.gerarHash(senha);
     }
 
     public void salvar() {
@@ -170,5 +171,12 @@ public class Usuario {
         }
     }
 
+    public boolean compararSenha(String senha) {
+        return HashFacade.compare(senha, this.senha);
+    }
+
+    public boolean compararSenha(String senhaCrua, String senhaHash) {
+        return HashFacade.compare(senhaCrua, senhaHash);
+    }
 
 }
