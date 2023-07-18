@@ -4,37 +4,37 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="index.html">
+                <a class="nav-link active" href="index.jsp">
                     <img src="src/img/beericon.png" alt="Icon" class="icon">
                     Home
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="search.html">
+                <a class="nav-link" href="search.jsp">
                     <!--
                     <img src="src/img/whitelupa.png" alt="Icon" class="icon">
                     -->
                     <i class="fa-solid fa-magnifying-glass icon" alt="Icon"></i>
-                    Search
+                    Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search.html">
+                <a class="nav-link" href="/Register">
                     <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    Search
+                    Clients
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search.html">
+                <a class="nav-link" href="">
                     <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    Search
+                    Products
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search.html">
+                <a class="nav-link" href="">
                     <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    Search
+                    Orders
                 </a>
             </li>
         </ul>
