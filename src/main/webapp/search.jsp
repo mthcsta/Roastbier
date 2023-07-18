@@ -33,7 +33,7 @@
                             </div>
 
                             <!-- Tabela DataTable-->
-                            <table style="margin-top: 20px;">
+                            <table style="margin-top: 20px;" id="table_search">
                             
                             </table>
 
@@ -48,4 +48,12 @@
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="<%=System.getProperty("BASE_URL")%>/src/scripts/helpers.js"></script>
+<script src="<%=System.getProperty("BASE_URL")%>/src/scripts/search/<%=request.getParameter("search")%>.js"></script>
+
 <%@ include file="partials/footer.jsp" %>

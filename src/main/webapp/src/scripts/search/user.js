@@ -1,0 +1,32 @@
+$(document).ready(function() {
+    
+    $("#table_search").dataTable({
+        columns: [
+            {
+                title: 'Selecionar',
+                render: function(data, type, row) {
+                    return `<input type="checkbox" name="selecionar[]" value="${row.cpf}" />`;
+                },
+                width: 50,
+            },
+            { title: 'CPF', data: 'cpf' },
+            { title: 'Name', data: 'nome' },
+            { title: 'Birthday', data: 'nome' },
+            { title: 'Email', data: 'email' },
+            { title: 'Telephone', data: 'telefone' },
+            {
+                title: 'Has Whatsapp?',
+                render: function(data, type, row) {
+                    return row.whats ? 'Yes' : 'No'
+                },
+                data: 'whats'
+            },
+            { title: 'Username', data: 'usuario' },
+        ],
+        processing: true,
+        serverSide: true,
+        ajax: url_path("/listar?model=user"),
+
+    })
+
+});

@@ -279,33 +279,33 @@ public class Cliente {
     }
 
     public Cliente[] listar() throws SQLException {
+        return null;
+        // Connection conexao = null;
+        // PreparedStatement preparedStatement = null;
+        // ResultSet rs = null;
+        // List<Cliente> lista = new ArrayList();
         
-        Connection conexao = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet rs = null;
-        List<Cliente> lista = new ArrayList();
-        
-        try {
-            conexao = new Conexao().getConexao();   
-            preparedStatement = conexao.prepareStatement("select id, nome, data_nascimento, cpf, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep from Clientes");
+        // try {
+        //     conexao = new Conexao().getConexao();   
+        //     preparedStatement = conexao.prepareStatement("select id, nome, data_nascimento, cpf, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep from Clientes");
             
-            rs = preparedStatement.executeQuery();
+        //     rs = preparedStatement.executeQuery();
             
-            while (rs.next()) {
-                Cliente c = new Cliente();
-                c.setCodigoBarras(rs.getString("codigo_barras"));
+        //     while (rs.next()) {
+        //         Cliente c = new Cliente();
+        //         c.setCodigoBarras(rs.getString("codigo_barras"));
                   
-                lista.add(c);
-            }
+        //         lista.add(c);
+        //     }
             
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            preparedStatement.close();
-            conexao.close();
-        }
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // } finally {
+        //     preparedStatement.close();
+        //     conexao.close();
+        // }
         
-        return lista.toArray(new Cliente[0]);
+        // return lista.toArray(new Cliente[0]);
         
     }
 }
