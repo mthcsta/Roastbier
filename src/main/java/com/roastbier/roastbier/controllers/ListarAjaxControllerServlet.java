@@ -36,13 +36,13 @@ public class ListarAjaxControllerServlet extends HttpServlet {
 
     private Object[] getListByModel(String model, String search) throws Exception {
         switch (model) {
-            case "users":
+            case "user":
                 return Usuario.Listar(search);
-            case "clients":
+            case "client":
                 return Cliente.Listar(search);
-            case "products":
+            case "product":
                 return Produto.Listar(search);
-            case "orders":
+            case "order":
                 return Pedido.Listar(search);
             default:
                 throw new Exception("Model not found");
