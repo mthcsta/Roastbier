@@ -1,4 +1,4 @@
-<form id="myForm" onsubmit="return validar();">
+<form id="myForm" action="<%=System.getProperty("BASE_URL")%>/register?m=user" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
 

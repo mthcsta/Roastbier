@@ -1,7 +1,7 @@
 package com.roastbier.roastbier.enums;
 
 public enum UnidadeMedida {
-    UNIDADE("UNI", "Unidade"), PECA("PEC", "Peça"), LITRO("LT", "Litro"), KILOGRAMA("KG", "Kg"), CAIXA("CX", "Caixa"), FRASCO("FR", "Frasco"), GARRAFA("GAR", "Garrafa");
+    UNIDADE("UNI", "Unidade"), PECA("PEC", "Peça"), LITRO("LT", "Litro"), KILOGRAMA("KG", "Kilograma"), CAIXA("CX", "Caixa"), FRASCO("FR", "Frasco"), GARRAFA("GAR", "Garrafa");
 
     private final String abreviacao;
     private final String unidade;
