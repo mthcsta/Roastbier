@@ -14,7 +14,7 @@
     <br>
     <div>
         <label for="dataNascimento">Birth Date:</label>
-        <input type="text" id="dataNascimento" name="dataNascimento" placeholder="dd/mm/yyyy">
+        <input type="text" id="dataNascimento" name="dataNascimento" placeholder="yyyy-mm-dd">
     </div>
     <br>
     <div>

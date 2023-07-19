@@ -144,6 +144,7 @@ public class Pedido {
 
             rs = preparedStatement.executeQuery();
 
+            /*
             while (rs.next()) {
                 Usuario user = new Usuario(
                         rs.getString("cpf"),
@@ -157,6 +158,7 @@ public class Pedido {
                 );
                 lista.add(user);
             }
+             */
 
         } catch (Exception e) {
             e.printStackTrace();

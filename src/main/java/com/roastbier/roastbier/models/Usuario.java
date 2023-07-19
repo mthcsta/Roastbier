@@ -4,21 +4,20 @@ import com.mysql.cj.util.StringUtils;
 import com.roastbier.roastbier.Conexao;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
     private String cpf;
     private String nome;
-    private LocalDate dataNascimento;
+    private Date dataNascimento;
     private String email;
     private String telefone;
     private Boolean whats;
     private String usuario;
     private String senha;
 
-    public Usuario(String cpf, String nome, LocalDate dataNascimento, String email, String telefone, Boolean whats, String usuario, String senha) {
+    public Usuario(String cpf, String nome, Date dataNascimento, String email, String telefone, Boolean whats, String usuario, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -45,11 +44,11 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public LocalDate getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -113,7 +112,7 @@ public class Usuario {
 
             preparedStatement.setString(1, this.cpf);
             preparedStatement.setString(2, this.nome);
-            preparedStatement.setDate(3, Date.valueOf(this.dataNascimento));
+            preparedStatement.setDate(3, this.dataNascimento);
             preparedStatement.setString(4, this.email);
             preparedStatement.setString(5, this.telefone);
             preparedStatement.setBoolean(6, this.whats);
@@ -148,7 +147,7 @@ public class Usuario {
                     + "WHERE cpf = ?");
 
             preparedStatement.setString(1, this.nome);
-            preparedStatement.setDate(2, Date.valueOf(this.dataNascimento));
+            preparedStatement.setDate(2, this.dataNascimento);
             preparedStatement.setString(3, this.email);
             preparedStatement.setString(4, this.telefone);
             preparedStatement.setBoolean(5, this.whats);
@@ -226,7 +225,7 @@ public class Usuario {
                 Usuario user = new Usuario(
                     rs.getString("cpf"),
                     rs.getString("nome"),
-                    LocalDate.parse(rs.getString("data_nascimento")),
+                    rs.getDate("data_nascimento"),
                     rs.getString("email"),
                     rs.getString("telefone"),
                     Boolean.parseBoolean(rs.getString("whats")),

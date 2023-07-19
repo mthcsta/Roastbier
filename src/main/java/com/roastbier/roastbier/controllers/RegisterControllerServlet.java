@@ -8,6 +8,7 @@ import com.roastbier.roastbier.models.Usuario;
 
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 
 @WebServlet(name = "RegisterControllerServlet", value = "/register")
@@ -24,7 +25,7 @@ public class RegisterControllerServlet extends BaseServlet {
         try {
             String cpf = request.getParameter("cpf");
             String nome = request.getParameter("nome");
-            LocalDate data = LocalDate.parse(request.getParameter("data"));
+            Date data = Date.valueOf(request.getParameter("dataNascimento"));
             String email = request.getParameter("email");
             String telefone = request.getParameter("telefone");
             Boolean whats = Boolean.parseBoolean(request.getParameter("whats"));
