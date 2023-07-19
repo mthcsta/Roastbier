@@ -11,9 +11,9 @@ public class Cliente {
     private int id = -1;
     private String cpf;
     private String nome;
-    private LocalDate dataNascimento;
+    private Date dataNascimento;
     private String rg;
-    private String orgao_emissor;
+    private String orgaoEmissor;
     private String email;
     private String telefone;
     private Boolean whats;
@@ -24,14 +24,14 @@ public class Cliente {
     private String estado;
     private String cep;
 
-    public Cliente(String cpf, String nome, LocalDate dataNascimento, String rg, String orgao_emissor,
+    public Cliente(String cpf, String nome, Date dataNascimento, String rg, String orgaoEmissor,
             String email, String telefone, Boolean whats, String logradouro, String numero, String bairro,
             String cidade, String estado, String cep) {
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.rg = rg;
-        this.orgao_emissor = orgao_emissor;
+        this.orgaoEmissor = orgaoEmissor;
         this.email = email;
         this.telefone = telefone;
         this.whats = whats;
@@ -43,14 +43,15 @@ public class Cliente {
         this.cep = cep;
     }
 
-    public Cliente(int id, String cpf, String nome, LocalDate dataNascimento, String rg, String orgao_emissor,
+    public Cliente(int id, String cpf, String nome, Date dataNascimento, String rg, String orgaoEmissor,
     String email, String telefone, Boolean whats, String logradouro, String numero, String bairro,
     String cidade, String estado, String cep) {
+        this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.rg = rg;
-        this.orgao_emissor = orgao_emissor;
+        this.orgaoEmissor = orgaoEmissor;
         this.email = email;
         this.telefone = telefone;
         this.whats = whats;
@@ -75,7 +76,7 @@ public class Cliente {
         return nome;
     }
 
-    public LocalDate getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
@@ -83,8 +84,8 @@ public class Cliente {
         return rg;
     }
 
-    public String getOrgao_emissor() {
-        return orgao_emissor;
+    public String getOrgaoEmissor() {
+        return orgaoEmissor;
     }
 
     public String getEmail() {
@@ -136,7 +137,7 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -144,8 +145,8 @@ public class Cliente {
         this.rg = rg;
     }
 
-    public void setOrgao_emissor(String orgao_emissor) {
-        this.orgao_emissor = orgao_emissor;
+    public void setOrgaoEmissor(String orgaoEmissor) {
+        this.orgaoEmissor = orgaoEmissor;
     }
 
     public void setEmail(String email) {
@@ -205,9 +206,9 @@ public class Cliente {
 
             preparedStatement.setString(1, this.getCpf());
             preparedStatement.setString(2, this.getNome());
-            preparedStatement.setDate(3, Date.valueOf(this.getDataNascimento()));
+            preparedStatement.setDate(3, this.getDataNascimento());
             preparedStatement.setString(4, this.getRg());
-            preparedStatement.setString(5, this.getOrgao_emissor());
+            preparedStatement.setString(5, this.getOrgaoEmissor());
             preparedStatement.setString(6, this.getEmail());
             preparedStatement.setString(7, this.getTelefone());
             preparedStatement.setBoolean(8, this.getWhats());
@@ -247,9 +248,9 @@ public class Cliente {
                     + "WHERE id = ?");
 
             preparedStatement.setString(1, this.getNome());
-            preparedStatement.setDate(2, Date.valueOf(this.getDataNascimento()));
+            preparedStatement.setDate(2, this.getDataNascimento());
             preparedStatement.setString(3, this.getRg());
-            preparedStatement.setString(4, this.getOrgao_emissor());
+            preparedStatement.setString(4, this.getOrgaoEmissor());
             preparedStatement.setString(5, this.getEmail());
             preparedStatement.setString(6, this.getTelefone());
             preparedStatement.setBoolean(7, this.getWhats());
@@ -292,12 +293,14 @@ public class Cliente {
 
             rs = preparedStatement.executeQuery();
 
+            System.out.println("AAAA");
             while (rs.next()) {
+                System.out.println(rs.getInt("id"));
                 Cliente client = new Cliente(
                         rs.getInt("id"), 
                         rs.getString("cpf"),
                         rs.getString("nome"),
-                        LocalDate.parse(rs.getString("data_nascimento")),
+                        rs.getDate("data_nascimento"),
                         rs.getString("rg"),
                         rs.getString("orgao_emissor"), 
                         rs.getString("email"), 
@@ -310,6 +313,7 @@ public class Cliente {
                         rs.getString("estado"), 
                         rs.getString("cep")
                 );
+                System.out.println(client);
                 lista.add(client);
             }
 
