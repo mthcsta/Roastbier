@@ -4,7 +4,7 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="index.jsp">
+                <a class="nav-link active" href="<%=System.getProperty("BASE_URL")%>/">
                     <i class="fa-solid fa-beer-mug-empty pe-3"></i>
                     Home
                 </a>
@@ -19,28 +19,26 @@
                 </a>
             </li>
             <% } else { %>
-
-
             <li class="nav-item">
-                <a class="nav-link" href="search.jsp">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=users">
                     <i class="fa-solid fa-user pe-3"></i>
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/Register">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=clients">
                     <i class="fa-solid fa-people-group pe-3"></i>
                     Clients
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=products">
                     <i class="fa-solid fa-wheat-awn pe-3"></i>
                     Products
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=orders">
                     <i class="fa-solid fa-truck pe-3"></i>
                     Orders
                 </a>

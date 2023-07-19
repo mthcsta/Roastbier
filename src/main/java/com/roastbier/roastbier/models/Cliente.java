@@ -278,34 +278,58 @@ public class Cliente {
         }
     }
 
-    public Cliente[] listar() throws SQLException {
-        return null;
-        // Connection conexao = null;
-        // PreparedStatement preparedStatement = null;
-        // ResultSet rs = null;
-        // List<Cliente> lista = new ArrayList();
-        
-        // try {
-        //     conexao = new Conexao().getConexao();   
-        //     preparedStatement = conexao.prepareStatement("select id, nome, data_nascimento, cpf, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep from Clientes");
-            
-        //     rs = preparedStatement.executeQuery();
-            
-        //     while (rs.next()) {
-        //         Cliente c = new Cliente();
-        //         c.setCodigoBarras(rs.getString("codigo_barras"));
-                  
-        //         lista.add(c);
-        //     }
-            
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // } finally {
-        //     preparedStatement.close();
-        //     conexao.close();
-        // }
-        
-        // return lista.toArray(new Cliente[0]);
-        
+    public static Cliente[] Listar(String search) {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Cliente> lista = new ArrayList();
+
+        try {
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement("select id, nome, data_nascimento, cpf, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep from clientes WHERE nome LIKE CONCAT( '%',?,'%')");
+
+            preparedStatement.setString(1, search);
+
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Cliente client = new Cliente(
+                        rs.getInt("id"), 
+                        rs.getString("cpf"),
+                        rs.getString("nome"),
+                        LocalDate.parse(rs.getString("data_nascimento")),
+                        rs.getString("rg"),
+                        rs.getString("orgao_emissor"), 
+                        rs.getString("email"), 
+                        rs.getString("telefone"), 
+                        Boolean.parseBoolean(rs.getString("whats")), 
+                        rs.getString("logradouro"), 
+                        rs.getString("numero"), 
+                        rs.getString("bairro"), 
+                        rs.getString("cidade"), 
+                        rs.getString("estado"), 
+                        rs.getString("cep")
+                );
+                lista.add(client);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+        return lista.toArray(new Cliente[0]);
+
     }
+
 }

@@ -16,7 +16,7 @@
                 <div class="container">
                     <h1>
                         Registration was successful!
-                        <a href="/search.jsp" class="btn btn-primary">Back</a>
+                        <a href="/list.jsp" class="btn btn-primary">Back</a>
                     </h1>
                 </div>
             </main>

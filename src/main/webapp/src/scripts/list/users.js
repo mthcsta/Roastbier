@@ -25,7 +25,7 @@ $(document).ready(function() {
         ],
         processing: true,
         serverSide: true,
-        ajax: url_path("/listar?model=user"),
+        ajax: url_path("/ajax/list?m=users"),
 
     });
 

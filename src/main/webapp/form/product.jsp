@@ -1,3 +1,4 @@
+<%@ page import="com.roastbier.roastbier.enums.UnidadeMedida" %>
 <form id="myForm" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
@@ -21,13 +22,9 @@
         <label for="unidade">Unity:</label>
         <br>
         <select id="unidade" name="unidade" maxlength="255" required>
-            <option value="UNI">Unidade</option>
-            <option value="PEC">Peça</option>
-            <option value="LT">Litro</option>
-            <option value="KG">Kilogramas</option>
-            <option value="CX">Caixa</option>
-            <option value="FR">Frasco</option>
-            <option value="GAR">Garrafa</option>
+            <% for (UnidadeMedida unidadeMedida : UnidadeMedida.values()) { %>
+                <option value="<%=unidadeMedida.getAbreviacao()%>>"><%=unidadeMedida.getUnidade()%>></option>
+            <% } %>
         </select>
     </div>
     <br>
