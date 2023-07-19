@@ -21,19 +21,19 @@
                     <div class="box">
                         <% switch (request.getParameter("form")) {
                                 case "user":
-                                    %><%@ include file="form_register/user.jsp" %><%
+                                    %><%@ include file="form/user.jsp" %><%
                                 break;
                                 case "client":
-                                    %><%@ include file="form_register/client.jsp" %><%
+                                    %><%@ include file="form/client.jsp" %><%
                                 break;
                                 case "product":
-                                    %><%@ include file="form_register/product.jsp" %><%
+                                    %><%@ include file="form/product.jsp" %><%
                                 break;
                                 case "order":
-                                    %><%@ include file="form_register/order.jsp" %><%
+                                    %><%@ include file="form/order.jsp" %><%
                                 break;
                                 default:
-                                    %><%@ include file="form_register/error.jsp" %><%
+                                    %><%@ include file="form/error.jsp" %><%
                                 break;
                         }
                         %>

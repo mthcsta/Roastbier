@@ -4,8 +4,8 @@ $(document).ready(function() {
         event.preventDefault();
         event.stopPropagation();
 
+        // Animação de Loading
         $("#form_button_submit").trigger('loading');
-
         await new Promise((resolve) => setTimeout(resolve, 500));
 
         $.ajax({

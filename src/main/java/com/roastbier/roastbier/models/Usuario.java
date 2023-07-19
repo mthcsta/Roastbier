@@ -182,7 +182,7 @@ public class Usuario {
             preparedStatement = conexao.prepareStatement("SELECT cpf FROM usuarios WHERE Username = ? AND Senha = md5(?)");
 
             preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, (senha));
+            preparedStatement.setString(2, senha);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

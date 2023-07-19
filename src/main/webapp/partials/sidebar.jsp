@@ -20,25 +20,25 @@
             </li>
             <% } else { %>
             <li class="nav-item">
-                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=users">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=user">
                     <i class="fa-solid fa-user pe-3"></i>
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=clients">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=client">
                     <i class="fa-solid fa-people-group pe-3"></i>
                     Clients
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=products">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=product">
                     <i class="fa-solid fa-wheat-awn pe-3"></i>
                     Products
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=orders">
+                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/list?m=order">
                     <i class="fa-solid fa-truck pe-3"></i>
                     Orders
                 </a>

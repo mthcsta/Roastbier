@@ -3,6 +3,9 @@
     <ul id="erros" style="color: #FF0000;"></ul>
 
     <div>
+        <input type="text" id="id" hidden>
+    </div>
+    <div>
         <label for="nome">Name:</label>
         <input type="text" id="nome" name="nome" maxlength="100" required>
     </div>

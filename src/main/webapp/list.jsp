@@ -27,8 +27,8 @@
                             <input type="text" name="Filter" id="filter" style="width: 50%;" placeholder="Type the filter">
 
                             <div>
-                                <button class="btn-insert" onclick="window.location.href = 'register.html';">Insert</button>
-                                <button class="btn-update" onclick="window.location.href = 'register.html';">Update</button>
+                                <a href="<%=System.getProperty("BASE_URL")%>/register?form=<%=request.getParameter("m")%>" class="btn btn-delete">Insert</a>
+                                <a href="<%=System.getProperty("BASE_URL")%>/register?form=<%=request.getParameter("m")%>" class="btn btn-delete">Update</a>
                                 <button class="btn-delete" id="btn-delete">Delete</button>
                             </div>
 
@@ -36,9 +36,7 @@
                             <table style="margin-top: 20px;" id="table_search">
                             
                             </table>
-
                         </div>
-
                     </div>
             </main>
 

@@ -19,7 +19,7 @@
           <hr>
 
           <div class="box">
-            <p>Everything was saved in the data base!</p>
+            <p><%=request.getAttribute("message")%></p>
             <button class="btn-insert" onclick="window.location.href = 'search.html';">Back to search page</button>
           </div>
 

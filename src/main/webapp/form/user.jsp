@@ -1,4 +1,4 @@
-<form id="myForm" action="<%=System.getProperty("BASE_URL")%>/register?m=user" onsubmit="return validar();">
+<form id="myForm" method="POST" action="<%=System.getProperty("BASE_URL")%>/register?m=user" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
@@ -43,5 +43,6 @@
         <input type="text" id="senha" name="senha" maxlength="255" required>
     </div>
     <br>
+    <input type="submit" value="insert" class="btn btn-primary">
 </form>
 <script src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>
