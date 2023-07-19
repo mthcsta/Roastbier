@@ -1,3 +1,14 @@
+$(document).ready(function(){
+    $('#dataNascimento').on('input', function() {
+        var data = $(this).val();
+        if (data.length === 10) {
+          $(this).mask('0000-00-00', {reverse: false});
+        } else {
+          $(this).mask('0000-00-00?9', {reverse: false});
+        }
+      });
+})
+
 function validar() {
 
     var retorno = true;

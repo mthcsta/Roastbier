@@ -12,7 +12,7 @@
     <br>
     <div>
         <label for="dataNascimento">Birth Date:</label>
-        <input type="text" id="dataNascimento" name="dataNascimento" placeholder="yyyy-mm-dd">
+        <input type="date" id="dataNascimento" name="dataNascimento" placeholder="yyyy-mm-dd">
     </div>
     <br>
     <div>
@@ -27,7 +27,7 @@
     <br>
     <div>
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="email" id="email" name="email" required>
     </div>
     <br>
     <div>

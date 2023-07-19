@@ -46,9 +46,9 @@ $(document).ready(function() {
   $('#dataNascimento').on('input', function() {
     var data = $(this).val();
     if (data.length === 10) {
-      $(this).mask('00/00/0000', {reverse: false});
+      $(this).mask('0000-00-00', {reverse: false});
     } else {
-      $(this).mask('00/00/0000?9', {reverse: false});
+      $(this).mask('0000-00-00?9', {reverse: false});
     }
   });
 
