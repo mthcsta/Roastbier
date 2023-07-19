@@ -1,5 +1,6 @@
 package com.roastbier.roastbier.models;
 
+import com.mysql.cj.util.StringUtils;
 import com.roastbier.roastbier.Conexao;
 
 import java.sql.*;
@@ -254,5 +255,81 @@ public class Usuario {
         
     }
 
+    public boolean deletar() {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement("DELETE FROM usuarios WHERE cpf = ?");
+
+            preparedStatement.setString(1, this.cpf);
+
+            preparedStatement.executeQuery();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean Deletar(String[] ids) {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            StringBuilder sqlBuilder = new StringBuilder();
+
+            sqlBuilder.append("DELETE FROM usuarios WHERE cpf IN (");
+            for (int quantidade = ids.length - 1; quantidade > 0; quantidade--) {
+                sqlBuilder.append("?,");
+            }
+            sqlBuilder.append("?)");
+
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
+
+            for (int indice = 0; indice < ids.length; indice++) {
+                preparedStatement.setString(indice + 1, ids[indice]);
+            }
+
+            System.out.println(preparedStatement.toString());
+
+            //preparedStatement.executeQuery();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+        return false;
+
+    }
 
 }

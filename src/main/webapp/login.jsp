@@ -34,20 +34,29 @@
             <img class="" src="src/img/beericon.png" alt="" width="57" height="57">
         </div>
 
-        <h1 class="h3 mb-3 fw-normal">Conectar</h1>
+        <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
         <div class="alert alert-danger my-3 text-start d-none" id="form_login_message"></div>
 
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username">
-            <label for="floatingInput">Usuário</label>
+            <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating">
             <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-            <label for="floatingPassword">Senha</label>
+            <label for="floatingPassword">Password</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Conectar</button>
+        <button class="w-100 btn btn-lg btn-primary" data-btn-loading="false" type="submit" id="form_button_submit">
+            <div data-btn-content="normal">
+                Connect
+            </div>
+            <div data-btn-content="loading">
+                <span class="spinner-border spinner-border-sm me-3"></span>
+                Connecting...
+            </div>
+        </button>
+
         <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
     </form>
 </main>
@@ -55,6 +64,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script src="<%=System.getProperty("BASE_URL")%>/src/scripts/helpers.js"></script>
+<script src="<%=System.getProperty("BASE_URL")%>/src/scripts/helpers.jquery.js"></script>
 <script src="<%=System.getProperty("BASE_URL")%>/src/scripts/auth/login.js"></script>
 
 </body>

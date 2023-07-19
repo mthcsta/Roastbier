@@ -5,7 +5,7 @@ $(document).ready(function() {
             {
                 title: 'Selecionar',
                 render: function(data, type, row) {
-                    return `<input type="checkbox" name="selecionar[]" value="${row.cpf}" />`;
+                    return `<input type="checkbox" name="delete[]" class="select_row" value="${row.cpf}" />`;
                 },
                 width: 50,
             },
@@ -27,6 +27,12 @@ $(document).ready(function() {
         serverSide: true,
         ajax: url_path("/listar?model=user"),
 
-    })
+    });
+
+    $("#btn-delete").on("click", function() {
+
+        $(".select_row").serializeArray();
+
+    });
 
 });

@@ -37,6 +37,7 @@ body{
 .all-content-container{
   display: block;
   width: 85%;
+  max-width: 2000px;
   margin: 0 auto;
   background-color: #ffffff;
 }

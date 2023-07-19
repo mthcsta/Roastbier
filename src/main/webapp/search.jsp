@@ -29,7 +29,7 @@
                             <div>
                                 <button class="btn-insert" onclick="window.location.href = 'register.html';">Insert</button>
                                 <button class="btn-update" onclick="window.location.href = 'register.html';">Update</button>
-                                <button class="btn-delete">Delete</button>
+                                <button class="btn-delete" id="btn-delete">Delete</button>
                             </div>
 
                             <!-- Tabela DataTable-->

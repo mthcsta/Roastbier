@@ -5,63 +5,49 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active" href="index.jsp">
-                    <!--
-                    <img src="src/img/beericon.png" alt="Icon" class="icon">
-                    -->
-                    <i class="fa-solid fa-beer-mug-empty"></i>
+                    <i class="fa-solid fa-beer-mug-empty pe-3"></i>
                     Home
                 </a>
+            </li>            
+            <%
+                if (request.getSession().getAttribute("cpf") == null) {
+            %>
+            <li class="nav-item">
+                <a class="nav-link bg-success" href="<%=System.getProperty("BASE_URL")%>/login">
+                    <i class="fa fa-sign-in pe-3" aria-hidden="true"></i>
+                    Sign In
+                </a>
             </li>
+            <% } else { %>
+
 
             <li class="nav-item">
                 <a class="nav-link" href="search.jsp">
-                    <!--
-                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    -->
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user pe-3"></i>
                     Users
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/Register">
-                    <!--
-                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    -->
-                    <i class="fa-solid fa-people-group"></i>
+                    <i class="fa-solid fa-people-group pe-3"></i>
                     Clients
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">
-                    <!--
-                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    -->
-                    <i class="fa-solid fa-wheat-awn"></i>
+                    <i class="fa-solid fa-wheat-awn pe-3"></i>
                     Products
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">
-                    <!--
-                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    -->
-                    <i class="fa-solid fa-truck"></i>
+                    <i class="fa-solid fa-truck pe-3"></i>
                     Orders
                 </a>
-            </li>
-            <%
-                if (request.getSession().getAttribute("cpf") == null) {
-            %>
+            </li>                
             <li class="nav-item">
-                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/login">
-                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
-                    Sign In
-                </a>
-            </li>
-            <% } else { %>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=System.getProperty("BASE_URL")%>/logout">
-                    <img src="src/img/whitelupa.png" alt="Icon" class="icon">
+                <a class="nav-link bg-danger" href="<%=System.getProperty("BASE_URL")%>/logout">
+                    <i class="fa fa-sign-in pe-3" aria-hidden="true"></i>
                     Logout
                 </a>
             </li>
