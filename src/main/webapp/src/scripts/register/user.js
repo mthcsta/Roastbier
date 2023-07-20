@@ -6,7 +6,11 @@ $(document).ready(function(){
         } else {
           $(this).mask('0000-00-00?9', {reverse: false});
         }
-      });
+    });
+
+    $("#cpf").inputmask({ mask: "999.999.999-99", removeMaskOnSubmit: true });
+
+    $("#telefone").inputmask({ mask: "(99) [9 ]9999-9999", removeMaskOnSubmit: true });
 })
 
 function validar() {

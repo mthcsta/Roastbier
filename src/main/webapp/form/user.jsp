@@ -5,7 +5,7 @@
     boolean update = false;
 
     if(request.getParameter("id") != null){
-        usuario.setId(request.getParameter("id"));
+        usuario.setCpf(request.getParameter("id"));
         usuario.selecionarPorId();
         update = true;
     }
@@ -17,7 +17,7 @@
     <input type="hidden" name="isUpdate" value="<%=update%>">
     <div>
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" maxlength="11" value="<%=usuario.getCpf()%>" <%=(update) ? "readonly" : "" %> required>
+        <input type="text" id="cpf" name="cpf" maxlength="15" value="<%=usuario.getCpf()%>" <%=(update) ? "readonly" : "" %> required>
     </div>
     <br>
     <div>
@@ -37,7 +37,7 @@
     <br>
     <div>
         <label for="telefone">Phone:</label>
-        <input type="text" id="telefone" name="telefone" maxlength="13" value="<%=usuario.getTelefone()%>">
+        <input type="text" id="telefone" name="telefone" maxlength="16" value="<%=usuario.getTelefone()%>">
     </div>
     <br>
     <div>
@@ -57,4 +57,4 @@
     <br>
     <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
-<script src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>
+<script defer src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>

@@ -92,4 +92,4 @@
     <br>
     <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
-<script src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>
+<script defer src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>

@@ -46,4 +46,4 @@
     </div>
     <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
-<script src="src/scripts/register/product.js" language="javascript" type="text/javascript"></script>
+<script defer src="src/scripts/register/product.js" language="javascript" type="text/javascript"></script>
