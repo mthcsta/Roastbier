@@ -18,7 +18,7 @@ public class DeletarControllerServlet extends HttpServlet {
 
         try {
             getListByModel(model, delete);
-            request.setAttribute("message", "Registros removido com sucesso!");
+            request.setAttribute("message", "Register successful!");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", true);
