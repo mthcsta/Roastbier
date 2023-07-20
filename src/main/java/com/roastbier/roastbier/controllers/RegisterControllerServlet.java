@@ -123,7 +123,13 @@ public class RegisterControllerServlet extends BaseServlet {
     
         Produto produto = new Produto(nome, descricao, unidade, precoUnitario);
 
-        produto.novo();
+        if(request.getParameter("isUpdate").equals("true")) {
+            produto.setId(Integer.parseInt(request.getParameter("id")));
+            produto.atualizar();
+        } else {
+            produto.novo();
+        }
+
 
         return true;
     } 
@@ -136,7 +142,13 @@ public class RegisterControllerServlet extends BaseServlet {
         int clienteId = Integer.parseInt(request.getParameter("clienteId"));
     
         Pedido pedido = new Pedido(dataEmissao, dataEntrega, valorFrete, clienteId);
-        pedido.novo();
+
+        if(request.getParameter("isUpdate").equals("true")) {
+            pedido.setNumero(Integer.parseInt(request.getParameter("id")));
+            pedido.atualizar();
+        } else {
+            pedido.novo();
+        }
 
         String[] produtosId = request.getParameterValues("produtoId[]");
         String[] produtosQTD = request.getParameterValues("quantidade[]");
@@ -150,7 +162,16 @@ public class RegisterControllerServlet extends BaseServlet {
             produtoHasPedido.setQuantidade(Integer.parseInt(produtosQTD[indice]));
             produtoHasPedido.setPrecoUnitario(Float.parseFloat(produtosPreco[indice]));
             produtoHasPedido.setUnidade(UnidadeMedida.getByAbreviacao(produtosUnidade[indice]));
-            produtoHasPedido.novo();
+
+            if(request.getParameter("isUpdate").equals("true")) {
+                if (produtoHasPedido.existe()) {
+                    produtoHasPedido.atualizar();
+                } else {
+                    produtoHasPedido.novo();
+                }
+            } else {
+                produtoHasPedido.novo();
+            }
         }
 
         return true;

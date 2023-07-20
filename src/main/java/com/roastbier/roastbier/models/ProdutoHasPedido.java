@@ -117,6 +117,38 @@ public class ProdutoHasPedido {
         }
     }
 
+    public void atualizar() throws Exception {
+        PreparedStatement preparedStatement = null;
+        try {
+            Connection conexao = Conexao.GetConexao();
+
+            preparedStatement = conexao.prepareStatement("UPDATE `Produtos_has_Pedidos` "
+                    + "SET quantidade = ?, preco_unitario = ?, unidade = ?"
+                    + "WHERE Produtos_id = ? AND Pedidos_numero = ?");
+
+            preparedStatement.setInt(1, this.quantidade);
+            preparedStatement.setFloat(2, this.precoUnitario);
+            preparedStatement.setString(3, this.unidade.getAbreviacao());
+            preparedStatement.setInt(4, this.produtoId);
+            preparedStatement.setInt(5, this.pedidoNumero);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw e;
+            }
+        }
+    }
+
     public static ProdutoHasPedido[] ListarPorPedido(int pedidoNumero) {
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -190,6 +222,75 @@ public class ProdutoHasPedido {
                 }
             } catch (Exception e) {
 
+            }
+        }
+    }
+
+    public boolean existe() {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conexao = Conexao.GetConexao();
+
+            preparedStatement = conexao.prepareStatement("select unidade from produtos_has_pedidos WHERE Pedidos_numero = ? and Produtos_id = ?");
+
+            preparedStatement.setInt(1, this.getPedidoNumero());
+            preparedStatement.setInt(2, this.getProdutoId());
+
+            System.out.println(preparedStatement.toString());
+
+            rs = preparedStatement.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+        return false;
+    }
+
+    public static boolean Deletar(String[] ids) throws Exception {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            StringBuilder sqlBuilder = new StringBuilder();
+
+            sqlBuilder.append("DELETE FROM produtos_has_pedidos WHERE Pedidos_numero IN (");
+            for (int quantidade = ids.length - 1; quantidade > 0; quantidade--) {
+                sqlBuilder.append("?,");
+            }
+            sqlBuilder.append("?)");
+
+            Connection conexao = Conexao.GetConexao();
+            preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
+
+            for (int indice = 0; indice < ids.length; indice++) {
+                preparedStatement.setInt(indice + 1, Integer.parseInt(ids[indice]));
+            }
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (Exception e) {
+                throw e;
             }
         }
     }

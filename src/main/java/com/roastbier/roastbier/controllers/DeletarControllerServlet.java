@@ -1,5 +1,8 @@
 package com.roastbier.roastbier.controllers;
 
+import com.roastbier.roastbier.models.Cliente;
+import com.roastbier.roastbier.models.Pedido;
+import com.roastbier.roastbier.models.Produto;
 import com.roastbier.roastbier.models.Usuario;
 
 import javax.servlet.*;
@@ -32,9 +35,9 @@ public class DeletarControllerServlet extends HttpServlet {
     private boolean getListByModel(String model, String[] ids) throws Exception {
         switch (model) {
             case "user": return Usuario.Deletar(ids);
-            case "cliente": return Usuario.Deletar(ids);
-            case "produto": return Usuario.Deletar(ids);
-            case "pedido": return Usuario.Deletar(ids);
+            case "client": return Cliente.Deletar(ids);
+            case "product": return Produto.Deletar(ids);
+            case "order": return Pedido.Deletar(ids);
             default: throw new Exception("Model not found");
         }
     }

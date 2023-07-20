@@ -458,6 +458,8 @@ public class Cliente {
 
             return true;
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new Exception("You cannot remove the client because he already has an order registered in the system");
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

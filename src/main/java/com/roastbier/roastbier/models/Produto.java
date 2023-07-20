@@ -246,7 +246,8 @@ public class Produto {
             preparedStatement.executeUpdate();
 
             return true;
-
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new Exception("You cannot remove the product because it already has an order registered in the system");
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

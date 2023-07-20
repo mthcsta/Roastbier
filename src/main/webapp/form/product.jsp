@@ -25,7 +25,7 @@
     <br>
     <div>
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" maxlength="255" value="<%=produto.getDescricao()%>">
+        <input type="text" id="description" name="descricao" maxlength="255" value="<%=produto.getDescricao()%>">
     </div>
     <br>
     <div>

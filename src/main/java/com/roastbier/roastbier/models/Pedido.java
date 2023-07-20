@@ -156,7 +156,7 @@ public class Pedido {
             Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("UPDATE `pedidos` "
-            + "SET numero = ?, data_emissao = ?, data_entrega = ?, valor_frete = ?, Clientes_id = ? "
+            + "SET data_emissao = ?, data_entrega = ?, valor_frete = ?, Clientes_id = ? "
             + "WHERE numero = ?");
 
             preparedStatement.setDate(1, this.dataEmissao);
@@ -231,6 +231,8 @@ public class Pedido {
 
     public static boolean Deletar(String[] ids) throws Exception {
         PreparedStatement preparedStatement = null;
+
+        ProdutoHasPedido.Deletar(ids);
 
         try {
             StringBuilder sqlBuilder = new StringBuilder();
