@@ -14,7 +14,7 @@
             <main role="main" class="col-md-8 bg-roastbier-main">
                 <div class="container">
                     <br>
-                    <h1>
+                    <h1 class="title">
                         <%=request.getParameter("form")%> Register
                     </h1>
                     <hr>

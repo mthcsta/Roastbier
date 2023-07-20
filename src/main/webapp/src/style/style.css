@@ -105,6 +105,10 @@ body{
   height: 20px;
 }
 
+h1.title{
+  text-transform: capitalize;
+}
+
 h1{
   font-size: 1.5em;
 }
