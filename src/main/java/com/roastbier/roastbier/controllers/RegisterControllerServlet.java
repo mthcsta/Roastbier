@@ -29,19 +29,20 @@ public class RegisterControllerServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-
-            boolean b = getRegisterByModel(request.getParameter("m"), request);
-
+            doRegisterByModel(request.getParameter("m"), request);
+            request.setAttribute("message", "Registro inserido com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
+            request.setAttribute("error", true);
             request.setAttribute("message", e.getMessage());
+        } finally {
             RequestDispatcher rd=request.getRequestDispatcher("results.jsp");
             rd.forward(request, response);
         }
 
     }
 
-    private boolean getRegisterByModel(String model, HttpServletRequest request) throws Exception {
+    private boolean doRegisterByModel(String model, HttpServletRequest request) throws Exception {
         switch (model) {
             case "user":
                 return userRegister(request);

@@ -80,15 +80,7 @@ public class Produto {
         this.precoUnitario = precoUnitario;
     }
 
-    public void salvar() {
-        if (this.id == -1) {
-            novo();
-            return;
-        }
-        atualizar();
-    }
-
-    public void novo() {
+    public void novo() throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -106,6 +98,7 @@ public class Produto {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -116,11 +109,12 @@ public class Produto {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
     }
 
-    public void atualizar() {
+    public void atualizar() throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -139,6 +133,7 @@ public class Produto {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -149,11 +144,12 @@ public class Produto {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
     }
 
-    public static Produto[] Listar(String search) {
+    public static Produto[] Listar(String search) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -195,6 +191,47 @@ public class Produto {
 
         return lista.toArray(new Produto[0]);
 
+    }
+
+    public static boolean Deletar(String[] ids) throws Exception {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            StringBuilder sqlBuilder = new StringBuilder();
+
+            sqlBuilder.append("DELETE FROM produtos WHERE id IN (");
+            for (int quantidade = ids.length - 1; quantidade > 0; quantidade--) {
+                sqlBuilder.append("?,");
+            }
+            sqlBuilder.append("?)");
+
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
+
+            for (int indice = 0; indice < ids.length; indice++) {
+                preparedStatement.setInt(indice + 1, Integer.parseInt(ids[indice]));
+            }
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+        }
     }
 
 }

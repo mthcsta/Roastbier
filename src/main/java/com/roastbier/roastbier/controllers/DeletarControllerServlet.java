@@ -15,15 +15,13 @@ public class DeletarControllerServlet extends HttpServlet {
         String[] delete = request.getParameterValues("delete[]");
 
         try {
-            System.out.println("MMMM");
             getListByModel(model, delete);
             request.setAttribute("message", "Registros removido com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", true);
-            request.setAttribute("message", "Registros removido com sucesso!");
+            request.setAttribute("message", e.getMessage());
         } finally {
-            request.setAttribute("message", "Registros removido com sucesso!");
             RequestDispatcher rd=request.getRequestDispatcher("results.jsp");
             rd.forward(request, response);
         }

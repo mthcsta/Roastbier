@@ -92,15 +92,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public void salvar() {
-        if (this.cpf == null) {
-            novo();
-            return;
-        }
-        atualizar();
-    }
-
-    public void novo() {
+    public void novo() throws Exception{
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -122,6 +114,7 @@ public class Usuario {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -132,11 +125,12 @@ public class Usuario {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
     }
 
-    public void atualizar() {
+    public void atualizar() throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -172,7 +166,7 @@ public class Usuario {
         }
     }
 
-    public static String autenticar(String usuario, String senha) {
+    public static String autenticar(String usuario, String senha) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -192,6 +186,7 @@ public class Usuario {
             return resultSet.getString(1);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -202,12 +197,13 @@ public class Usuario {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
-        return null;
+        //return null;
     }
 
-    public static Usuario[] Listar(String search) {
+    public static Usuario[] Listar(String search) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -237,6 +233,7 @@ public class Usuario {
             
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -246,7 +243,8 @@ public class Usuario {
                     conexao.close();
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
+                throw e;
             }
         }
         
@@ -254,7 +252,7 @@ public class Usuario {
         
     }
 
-    public static boolean Deletar(String[] ids) {
+    public static boolean Deletar(String[] ids) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
 
@@ -274,14 +272,13 @@ public class Usuario {
                 preparedStatement.setString(indice + 1, ids[indice]);
             }
 
-            System.out.println(preparedStatement.toString());
-
             preparedStatement.executeUpdate();
 
             return true;
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -291,12 +288,8 @@ public class Usuario {
                     conexao.close();
                 }
             } catch (Exception e) {
-
+                throw e;
             }
         }
-
-        return false;
-
     }
-
 }

@@ -71,7 +71,7 @@ public class Pedido {
     }
 
     
-    public void novo() {
+    public void novo() throws Exception{
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -94,6 +94,7 @@ public class Pedido {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -104,11 +105,12 @@ public class Pedido {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
     }
 
-    public void atualizar() {
+    public void atualizar() throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -127,6 +129,7 @@ public class Pedido {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -137,11 +140,12 @@ public class Pedido {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
     }
 
-    public static Usuario[] Listar(String search) {
+    public static Usuario[] Listar(String search) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -188,6 +192,47 @@ public class Pedido {
 
         return lista.toArray(new Usuario[0]);
 
+    }
+
+    public static boolean Deletar(String[] ids) throws Exception {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            StringBuilder sqlBuilder = new StringBuilder();
+
+            sqlBuilder.append("DELETE FROM pedidos WHERE numero IN (");
+            for (int quantidade = ids.length - 1; quantidade > 0; quantidade--) {
+                sqlBuilder.append("?,");
+            }
+            sqlBuilder.append("?)");
+
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
+
+            for (int indice = 0; indice < ids.length; indice++) {
+                preparedStatement.setInt(indice + 1, Integer.parseInt(ids[indice]));
+            }
+
+            preparedStatement.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+        }
     }
 
 }

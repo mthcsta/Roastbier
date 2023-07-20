@@ -67,7 +67,7 @@ public class ProdutoHasPedido {
             this.unidade = unidade;
         }
 
-    public void novo() {
+    public void novo() throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
@@ -86,6 +86,7 @@ public class ProdutoHasPedido {
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -96,6 +97,7 @@ public class ProdutoHasPedido {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
     }
