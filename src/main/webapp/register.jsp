@@ -20,20 +20,20 @@
                     <hr>
                     <div class="box">
                         <% switch (request.getParameter("form")) {
-                                case "user":
-                                    %><%@ include file="form/user.jsp" %><%
+                            case "user":
+                                %><jsp:include page="form/user.jsp" /><%
                                 break;
-                                case "client":
-                                    %><%@ include file="form/client.jsp" %><%
+                            case "client":
+                                %><jsp:include page="form/client.jsp" /><%
                                 break;
-                                case "product":
-                                    %><%@ include file="form/product.jsp" %><%
+                            case "product":
+                                %><jsp:include page="form/product.jsp" /><%
                                 break;
-                                case "order":
-                                    %><%@ include file="form/order.jsp" %><%
+                            case "order":
+                                %><jsp:include page="form/order.jsp" /><%
                                 break;
-                                default:
-                                    %><%@ include file="form/error.jsp" %><%
+                            default:
+                                %><jsp:include page="form/error.jsp" /><%
                                 break;
                         }
                         %>
