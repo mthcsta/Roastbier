@@ -1,7 +1,7 @@
-<%@ page import="com.roastbier.roastbier.models.Client"%>
+<%@ page import="com.roastbier.roastbier.models.Cliente"%>
 
 <%
-    Client client = new Client();
+    Cliente client = new Cliente();
     boolean update = false;
 
     if(request.getParameter("id") != null){
