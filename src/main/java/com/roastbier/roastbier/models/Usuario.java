@@ -254,38 +254,6 @@ public class Usuario {
         
     }
 
-    public boolean deletar() {
-        Connection conexao = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            conexao = new Conexao().getConexao();
-            preparedStatement = conexao.prepareStatement("DELETE FROM usuarios WHERE cpf = ?");
-
-            preparedStatement.setString(1, this.cpf);
-
-            preparedStatement.executeQuery();
-
-            return true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (conexao != null) {
-                    conexao.close();
-                }
-            } catch (Exception e) {
-
-            }
-        }
-
-        return false;
-    }
-
     public static boolean Deletar(String[] ids) {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
