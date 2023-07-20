@@ -1,13 +1,14 @@
 $(document).ready(function() {
-    
-    $("#table_search").dataTable({
+    const datatable = $("#table_search").DataTable({
         columns: [
             {
                 title: 'Selecionar',
                 render: function(data, type, row) {
-                    return `<input type="checkbox" name="delete[]" class="select_row" value="${row.cpf}" />`;
+                    return `<input type="checkbox" name="select[]" class="select_row" value="${row.cpf}" />`;
                 },
-                width: 50,
+                width: 30,
+                orderable: false,
+                class: "text-center"
             },
             { title: 'CPF', data: 'cpf' },
             { title: 'Name', data: 'nome' },
@@ -23,16 +24,19 @@ $(document).ready(function() {
             },
             { title: 'Username', data: 'usuario' },
         ],
-        processing: true,
-        serverSide: true,
-        ajax: url_path("/ajax/list?m=user"),
-
+        columnDefs: [{ targets: 0, orderable: false}],
+        order: [[ 2, 'asc' ]],
+        data: [],
+        searching: false,
+        responsive: true,
+        scrollCollapse: true,
+        deferRender: true,
     });
 
-    $("#btn-delete").on("click", function() {
-
-        $(".select_row").serializeArray();
-
+    $("#table_search").on('fill-table', function (event, obj) {
+        datatable.clear().rows.add(obj.data).draw(false);
     });
+
+    $("#btn-filter").trigger('click');
 
 });

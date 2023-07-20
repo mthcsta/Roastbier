@@ -20,22 +20,25 @@
                     <div class="box">
 
                         <div>
-                            <div style="overflow: hidden;">
-                                <label for="sigla" style="float: left; margin-right: 10px;">Filter: </label>
-                                <a class="btnfilter" href="#" style="background-color: black; color: white; border: none; border-radius: 5px; padding: 10px 20px; float: right;">Filter</a>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <label for="sigla" style="float: left; margin-right: 10px;">Filter: </label>
+                                    <input type="text" name="Filter" id="filter-value" class="form-control" placeholder="Type the filter">
+                                </div>
+                                <button class="btn btn-primary" id="btn-filter" data-model="<%=request.getParameter("m")%>">Filter</button>
                             </div>
-                            <input type="text" name="Filter" id="filter" style="width: 50%;" placeholder="Type the filter">
 
                             <div>
-                                <a href="<%=System.getProperty("BASE_URL")%>/register?form=<%=request.getParameter("m")%>" class="btn btn-delete">Insert</a>
-                                <a href="<%=System.getProperty("BASE_URL")%>/register?form=<%=request.getParameter("m")%>" class="btn btn-delete">Update</a>
-                                <button class="btn-delete" id="btn-delete">Delete</button>
+                                <button href="<%=System.getProperty("BASE_URL")%>/register?form=<%=request.getParameter("m")%>" class="btn btn-success" id="btn-insert">Insert</button>
+                                <button href="<%=System.getProperty("BASE_URL")%>/register?form=<%=request.getParameter("m")%>" class="btn btn-warning" id="btn-update">Update</button>
+                                <button class="btn btn-danger" id="btn-delete">Delete</button>
                             </div>
 
                             <!-- Tabela DataTable-->
-                            <table style="margin-top: 20px;" id="table_search">
-                            
-                            </table>
+                            <div class="table-responsive mt-3">
+                                <table id="table_search" class="display" cellspacing="0" width="100%"></table>
+                            </div>
+
                         </div>
                     </div>
             </main>
@@ -52,6 +55,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="<%=System.getProperty("BASE_URL")%>/src/scripts/helpers.js"></script>
+<script src="<%=System.getProperty("BASE_URL")%>/src/scripts/list/global.js"></script>
 <script src="<%=System.getProperty("BASE_URL")%>/src/scripts/list/<%=request.getParameter("m")%>.js"></script>
 
 <%@ include file="partials/footer.jsp" %>

@@ -17,15 +17,13 @@ public class ListarAjaxControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String model = request.getParameter("m");
-        String search = request.getParameter("search[value]");
-        int draw = Integer.parseInt(request.getParameter("draw"));
+        String search = request.getParameter("search");
 
         try {
             Object[] list = getListByModel(model, search);
 
             ObjectMapper mapper = new ObjectMapper();
-            DatatableSearchFormat k = DatatableSearchFormat.of(list, list.length, list.length, draw);
-            String json = mapper.writeValueAsString(k);
+            String json = mapper.writeValueAsString(list);
 
             response.setContentType("application/json");
             response.getWriter().print(json);

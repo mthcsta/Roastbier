@@ -1,13 +1,15 @@
 $(document).ready(function() {
 
-    const datatable =  $("#table_search").dataTable({
+    const datatable =  $("#table_search").DataTable({
         columns: [
             {
                 title: 'Selecionar',
                 render: function(data, type, row) {
-                    return `<input type="checkbox" name="delete[]" class="select_row" value="${row.cpf}" />`;
+                    return `<input type="checkbox" name="select[]" class="select_row" value="${row.cpf}" />`;
                 },
-                width: 50,
+                width: 30,
+                orderable: false,
+                class: "text-center"
             },
             { title: 'ID', data: 'id' }, 
             { title: 'Name', data: 'nome' }, 
@@ -16,22 +18,35 @@ $(document).ready(function() {
             { title: 'RG', data: 'rg' }, 
             { title: 'Orgão Emissor', data: 'orgaoEmissor' }, 
             { title: 'Email', data: 'email' }, 
-            { title: 'Cellphone', data: 'telefone' }, 
-            { title: 'Has Whatsapp?', data: 'whats' }, 
+            { title: 'Cellphone', data: 'telefone' },
+            {
+                title: 'Has Whatsapp?',
+                render: function(data, type, row) {
+                    return row.whats ? 'Yes' : 'No'
+                },
+                data: 'whats'
+            },
             { title: 'Public Place', data: 'logradouro' }, 
             { title: 'Number', data: 'numero' }, 
             { title: 'Neighborhood', data: 'bairro' }, 
             { title: 'City', data: 'cidade' }, 
             { title: 'State', data: 'estado' }, 
             { title: 'CEP', data: 'cep' }
-
         ],
-        processing: true,
-        serverSide: true,
+        columnDefs: [{ targets: 0, orderable: false}],
+        order: [[ 2, 'asc' ]],
+        data: [],
+        searching: false,
         responsive: true,
-        ajax: url_path("/ajax/list?m=client"),
+        scrollCollapse: true,
+        deferRender: true,
     });
 
-    console.log(datatable.DataTable());
+    $("#table_search").on('fill-table', function (event, obj) {
+        datatable.clear().rows.add(obj.data).draw(false);
+    });
+
+    $("#btn-filter").trigger('click');
+
 
 });
