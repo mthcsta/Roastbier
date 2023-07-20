@@ -49,7 +49,7 @@
     <div>
         <label for="telefone">Phone:</label>
         <br>
-        <textarea id="telefone" name="telefone" maxlength="13" value="<%=client.getTelefone()%>"></textarea>
+        <input type="text" id="telefone" name="telefone" maxlength="13" value="<%=client.getTelefone()%>">
     </div>
     <br>
     <div>
@@ -88,5 +88,6 @@
     </div>
     <br>
     <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="button" onclick="history.back()">
 </form>
 <script defer src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>

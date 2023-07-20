@@ -54,5 +54,6 @@
     </div>
     <br>
     <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="button" onclick="history.back()">
 </form>
 <script defer src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>
