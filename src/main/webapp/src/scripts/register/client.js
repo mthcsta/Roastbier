@@ -27,7 +27,10 @@ function viaCep(){
                 console.log('CEP not found!');
             }
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          $("#erros").append("<li>Error fetching data from CEP service.</li>");
+      });
     
 }
 
