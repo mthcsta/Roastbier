@@ -91,7 +91,7 @@ public class Produto {
             conexao = new Conexao().getConexao();
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `produtos` "
-                    + "(id, nome, descricao, unidade, preco_unitario)"
+                    + "(nome, descricao, unidade, preco_unitario)"
                     + "VALUES (?, ?, ?, ?)");
 
             preparedStatement.setString(1, this.nome);

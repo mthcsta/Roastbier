@@ -28,6 +28,13 @@ $(document).ready(function() {
                 data: 'precoTotal'
             },
             { title: 'Client Name', data: 'cliente.nome' },
+            {   
+                title: 'Action',
+                className: 'dt-control',
+                orderable: false,
+                data: null,
+                defaultContent: ''
+            },
         ],
         columnDefs: [{ targets: 0, orderable: false}],
         order: [[ 2, 'asc' ]],
@@ -44,4 +51,46 @@ $(document).ready(function() {
 
     $("#btn-filter").trigger('click');
 
+    $("#table_search").on('click', 'td.dt-control', function (e) {
+        let tr = e.target.closest('tr');
+        let row = datatable.row(tr);
+     
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+        }
+        else {
+            // Open this row
+            row.child(format(row.data())).show();
+        }
+    });
 });
+function formatTr(productData) {
+    return `
+    <tr>
+        <td>${productData.produto.nome}</td>
+        <td>${productData.precoUnitario}</td>
+        <td>${productData.quantidade}</td>
+    </tr>
+    `
+}
+function format(data) {
+    const tr = data.produtoHasPedidos.map(formatTr).join("");
+    return (
+        `
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Value</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${tr}
+        </tbody>
+        </table>
+        `
+    );
+}
+
