@@ -88,6 +88,6 @@
     </div>
     <br>
     <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
-    <input type="button" onclick="history.back()">
+    <input type="button" onclick="history.back()" class="btn btn-primary" value="Cancel">
 </form>
 <script defer src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>

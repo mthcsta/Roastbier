@@ -43,6 +43,6 @@
         <input type="number" name="precoUnitario" id="precoUnitario" value="<%=produto.getPrecoUnitario()%>" required>
     </div>
     <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
-    <input type="button" onclick="history.back()">
+    <input type="button" onclick="history.back()" class="btn btn-primary" value="Cancel">
 </form>
 <script defer src="src/scripts/register/product.js" language="javascript" type="text/javascript"></script>
