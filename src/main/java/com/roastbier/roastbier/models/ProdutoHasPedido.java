@@ -25,7 +25,11 @@ public class ProdutoHasPedido {
     }
 
     public ProdutoHasPedido(){
-
+        this.produtoId = 0;
+        this.pedidoNumero = 0;
+        this.quantidade = 0;
+        this.precoUnitario = 0.0f;
+        this.unidade = null;
     }
 
         // Getters
@@ -162,16 +166,20 @@ public class ProdutoHasPedido {
 
             preparedStatement = conexao.prepareStatement("select Produtos_id, Pedidos_numero, quantidade, preco_unitario, unidade from produtos_has_pedidos WHERE Pedidos_numero = ? and Produtos_id = ?");
 
-            preparedStatement.setInt(1, this.pedidoNumero);
-            preparedStatement.setInt(1, this.produtoId);
+            preparedStatement.setInt(1, this.getPedidoNumero());
+            preparedStatement.setInt(2, this.getProdutoId());
+
+            System.out.println(preparedStatement.toString());
 
             rs = preparedStatement.executeQuery();
 
-            if(rs.next()){
-                        this.setQuantidade(rs.getInt("quantidade"));
-                        this.setPrecoUnitario(rs.getFloat("preco_unitario"));
-                        this.setUnidade(UnidadeMedida.getByAbreviacao(rs.getString("unidade")));
+            if(!rs.next()){
+                return;
             }
+
+            this.setQuantidade(rs.getInt("quantidade"));
+            this.setPrecoUnitario(rs.getFloat("preco_unitario"));
+            this.setUnidade(UnidadeMedida.getByAbreviacao(rs.getString("unidade")));
 
         } catch (Exception e) {
             e.printStackTrace();

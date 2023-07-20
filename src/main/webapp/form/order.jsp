@@ -61,13 +61,13 @@
                     produtoHasPedido.selecionarPorIdENumero();
             %>
                     <tr>
-                        <td><input type="checkbox" class="produtoId" name="produtoId[]" value="<%=produto.getId()%>"></td>
+                        <td><input type="checkbox" class="produtoId" name="produtoId[]" value="<%=produto.getId()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "checked" : ""%>></td>
                         <td><%=produto.getNome()%></td>
                         <td><%=produto.getPrecoUnitario()%></td>
                         <td>
-                            <input type="number" class="produtoData-<%=produto.getId()%>" name="quantidade[]" class="produtoData-<%=produto.getId()%>" maxlength="3000" value="<%=produtoHasPedido.getQuantidade()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "Disabled"%>>
-                            <input type="hidden" class="produtoData-<%=produto.getId()%>" name="preco[]" class="produtoData-<%=produto.getId()%>" value="<%=produto.getPrecoUnitario()%>" maxlength="3000" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "Disabled"%>
-                            <input type="hidden" class="produtoData-<%=produto.getId()%>" name="unidade[]" maxlength="3000" value="<%=produto.getUnidade().getAbreviacao()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "Disabled"%>
+                            <input type="number" class="produtoData-<%=produto.getId()%>" name="quantidade[]" class="produtoData-<%=produto.getId()%>" maxlength="3000" value="<%=produtoHasPedido.getQuantidade()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
+                            <input type="hidden" class="produtoData-<%=produto.getId()%>" name="preco[]" class="produtoData-<%=produto.getId()%>" value="<%=produto.getPrecoUnitario()%>" maxlength="3000" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
+                            <input type="hidden" class="produtoData-<%=produto.getId()%>" name="unidade[]" maxlength="3000" value="<%=produto.getUnidade().getAbreviacao()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
                         </td>
                     </tr>
             <% } %>
