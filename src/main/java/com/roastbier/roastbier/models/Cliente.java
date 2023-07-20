@@ -29,8 +29,8 @@ public class Cliente {
     }
 
     public Cliente(String cpf, String nome, Date dataNascimento, String rg, String orgaoEmissor,
-            String email, String telefone, Boolean whats, String logradouro, String numero, String bairro,
-            String cidade, String estado, String cep) {
+        String email, String telefone, Boolean whats, String logradouro, String numero, String bairro,
+        String cidade, String estado, String cep) {
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -207,11 +207,53 @@ public class Cliente {
         this.cep = cep;
     }
 
+    public boolean hasClientCpf(int id) throws SQLException {
+        PreparedStatement preparedStatement = null;
+    
+        try {
+            Connection conexao = Conexao.GetConexao();
+
+            String sql = null;
+            if (id == 0) {
+                sql = "SELECT cpf FROM clientes WHERE cpf = ?";
+            } else {
+                sql = "SELECT cpf FROM clientes WHERE cpf = ?  AND id != ?";
+            };
+
+            preparedStatement = conexao.prepareStatement(sql);;
+            preparedStatement.setString(1, this.getCpf());
+            
+            if (id != 0) {
+                preparedStatement.setInt(2, this.getId());
+            }
+    
+            ResultSet rs = preparedStatement.executeQuery();
+    
+            return rs.next();
+    
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public void novo() throws Exception {
         PreparedStatement preparedStatement = null;
 
         try {
             Connection conexao = Conexao.GetConexao();
+
+            if (hasClientCpf(0)) {
+                throw new Exception("Cpf already registered.");
+            }
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `clientes` "
                     + "(cpf, nome, data_nascimento, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep)"
