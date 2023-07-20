@@ -5,7 +5,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@Logado
 @WebServlet(name = "BaseServlet", value = "/BaseServlet")
 public class BaseServlet extends HttpServlet {
 
