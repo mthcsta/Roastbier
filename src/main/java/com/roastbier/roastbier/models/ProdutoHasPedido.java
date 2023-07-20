@@ -83,10 +83,9 @@ public class ProdutoHasPedido {
         }
 
     public void novo() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `Produtos_has_Pedidos` "
                     + "(Produtos_id, Pedidos_numero, quantidade, preco_unitario, unidade)"
@@ -107,9 +106,6 @@ public class ProdutoHasPedido {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
@@ -118,13 +114,12 @@ public class ProdutoHasPedido {
     }
 
     public static ProdutoHasPedido[] ListarPorPedido(int pedidoNumero) {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         List<ProdutoHasPedido> lista = new ArrayList();
 
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("select Produtos_id, Pedidos_numero, quantidade, preco_unitario, unidade from produtos_has_pedidos WHERE Pedidos_numero = ?");
 
@@ -149,9 +144,6 @@ public class ProdutoHasPedido {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
-                }
-                if (conexao != null) {
-                    conexao.close();
                 }
             } catch (Exception e) {
 

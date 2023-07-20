@@ -85,10 +85,9 @@ public class Produto {
     }
 
     public void novo() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `produtos` "
                     + "(nome, descricao, unidade, preco_unitario)"
@@ -108,9 +107,6 @@ public class Produto {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
@@ -119,10 +115,9 @@ public class Produto {
     }
 
     public void atualizar() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("UPDATE `produtos` "
                     + "SET nome = ?, descricao = ?, unidade = ?, preco_unitario = ? "
@@ -143,9 +138,6 @@ public class Produto {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
@@ -154,12 +146,11 @@ public class Produto {
     }
 
     public void selecionarPorId() {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
 
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
             preparedStatement = conexao.prepareStatement("select id, nome, descricao, unidade, preco_unitario from produtos WHERE id = ?");
 
             preparedStatement.setInt(1, this.id);
@@ -182,9 +173,6 @@ public class Produto {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (Exception e) {
 
             }
@@ -193,13 +181,12 @@ public class Produto {
     }
 
     public static Produto[] Listar(String search) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         List<Produto> lista = new ArrayList();
 
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
             preparedStatement = conexao.prepareStatement("select id, nome, descricao, unidade, preco_unitario from produtos WHERE nome LIKE CONCAT( '%',?,'%')");
 
             preparedStatement.setString(1, search);
@@ -224,9 +211,6 @@ public class Produto {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (Exception e) {
 
             }
@@ -237,7 +221,6 @@ public class Produto {
     }
 
     public static boolean Deletar(String[] ids) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
 
         try {
@@ -249,7 +232,7 @@ public class Produto {
             }
             sqlBuilder.append("?)");
 
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
             preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
 
             for (int indice = 0; indice < ids.length; indice++) {
@@ -267,9 +250,6 @@ public class Produto {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
-                }
-                if (conexao != null) {
-                    conexao.close();
                 }
             } catch (Exception e) {
                 throw e;

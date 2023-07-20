@@ -108,10 +108,9 @@ public class Pedido {
     }
     
     public void novo() throws Exception{
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `pedidos` "
                     + "(data_emissao, data_entrega, valor_frete, Clientes_id)"
@@ -136,9 +135,6 @@ public class Pedido {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
@@ -147,10 +143,9 @@ public class Pedido {
     }
 
     public void atualizar() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("UPDATE `pedidos` "
             + "SET numero = ?, data_emissao = ?, data_entrega = ?, valor_frete = ?, Clientes_id = ? "
@@ -171,9 +166,6 @@ public class Pedido {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
@@ -182,13 +174,12 @@ public class Pedido {
     }
 
     public static Pedido[] Listar(String search) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         List<Pedido> lista = new ArrayList();
 
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
             StringBuilder sqlBuilder = new StringBuilder("select numero, data_emissao, valor_frete, data_entrega, Clientes_id from pedidos ");
 
             if (search != null && search.length() > 0) {
@@ -222,9 +213,6 @@ public class Pedido {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (Exception e) {
 
             }
@@ -234,7 +222,6 @@ public class Pedido {
     }
 
     public static boolean Deletar(String[] ids) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
 
         try {
@@ -246,7 +233,7 @@ public class Pedido {
             }
             sqlBuilder.append("?)");
 
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
             preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
 
             for (int indice = 0; indice < ids.length; indice++) {
@@ -264,9 +251,6 @@ public class Pedido {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
-                }
-                if (conexao != null) {
-                    conexao.close();
                 }
             } catch (Exception e) {
                 throw e;

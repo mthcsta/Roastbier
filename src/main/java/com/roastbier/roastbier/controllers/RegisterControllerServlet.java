@@ -64,7 +64,7 @@ public class RegisterControllerServlet extends BaseServlet {
         Date data = Date.valueOf(request.getParameter("dataNascimento"));
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
-        Boolean whats = Boolean.parseBoolean(request.getParameter("whats"));
+        Boolean whats = request.getParameter("whats").equals("1");
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
     

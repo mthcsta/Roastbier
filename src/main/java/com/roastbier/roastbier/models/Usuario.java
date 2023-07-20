@@ -92,13 +92,27 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public boolean hasUser(Connection conexao) throws SQLException {
+    public boolean hasUser(String cpf) throws SQLException {
         PreparedStatement preparedStatement = null;
     
         try {
-            preparedStatement = conexao.prepareStatement("SELECT Username FROM usuarios WHERE Username = ? OR email = ?");
+            Connection conexao = Conexao.GetConexao();
+
+            String sql = null;
+
+            if (cpf == null) {
+                sql = "SELECT Username FROM usuarios WHERE Username = ? OR email = ?";
+            } else {
+                sql = "SELECT Username FROM usuarios WHERE (Username = ? OR email = ?) AND cpf != ?";
+            }
+
+            preparedStatement = conexao.prepareStatement(sql);
             preparedStatement.setString(1, this.getUsuario());
             preparedStatement.setString(2, this.getEmail());
+            
+            if (cpf != null) {
+                preparedStatement.setString(3, this.getCpf());
+            }
     
             ResultSet rs = preparedStatement.executeQuery();
     
@@ -119,31 +133,32 @@ public class Usuario {
     }
 
     public void novo() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
     
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
     
-            if (!hasUser(conexao)) {
-                preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
-                        + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
-    
-                preparedStatement.setString(1, this.cpf);
-                preparedStatement.setString(2, this.nome);
-                preparedStatement.setDate(3, this.dataNascimento);
-                preparedStatement.setString(4, this.email);
-                preparedStatement.setString(5, this.telefone);
-                preparedStatement.setBoolean(6, this.whats);
-                preparedStatement.setString(7, this.usuario);
-                preparedStatement.setString(8, this.senha);
-    
-                preparedStatement.execute();
-            } else {
+            if (hasUser(null)) {
                 throw new Exception("Username or Email already used!");
             }
-    
+
+            preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
+                    + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
+
+            preparedStatement.setString(1, this.cpf);
+            preparedStatement.setString(2, this.nome);
+            preparedStatement.setDate(3, this.dataNascimento);
+            preparedStatement.setString(4, this.email);
+            preparedStatement.setString(5, this.telefone);
+            preparedStatement.setBoolean(6, this.whats);
+            preparedStatement.setString(7, this.usuario);
+            preparedStatement.setString(8, this.senha);
+
+            preparedStatement.execute();
+
+        } catch (SQLIntegrityConstraintViolationException e) {
+                throw new Exception("CPF already used!");
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -159,12 +174,14 @@ public class Usuario {
     }
 
     public void atualizar() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
 
-        if(!hasUser()){
             try {
-                conexao = new Conexao().getConexao();
+                Connection conexao = Conexao.GetConexao();
+
+                if(hasUser(this.cpf)){
+                    throw new Exception("Username or Email already used!");
+                }
     
                 preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
                         + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
@@ -187,21 +204,16 @@ public class Usuario {
                     if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                    if (conexao != null) {
-                        conexao.close();
-                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-        }
     }
 
     public static String autenticar(String usuario, String senha) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         try {
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
 
             preparedStatement = conexao.prepareStatement("SELECT cpf FROM usuarios WHERE Username = ? AND Senha = md5(?)");
 
@@ -223,9 +235,6 @@ public class Usuario {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
@@ -235,13 +244,12 @@ public class Usuario {
     }
 
     public static Usuario[] Listar(String search) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         List<Usuario> lista = new ArrayList();
         
         try {
-            conexao = new Conexao().getConexao();   
+            Connection conexao = Conexao.GetConexao();   
             preparedStatement = conexao.prepareStatement("select cpf, nome, data_nascimento, email, telefone, whats, Username, Senha from usuarios WHERE nome LIKE CONCAT( '%',?,'%')");
 
             preparedStatement.setString(1, search);
@@ -255,7 +263,7 @@ public class Usuario {
                     rs.getDate("data_nascimento"),
                     rs.getString("email"),
                     rs.getString("telefone"),
-                    Boolean.parseBoolean(rs.getString("whats")),
+                    rs.getBoolean("whats"),
                     rs.getString("Username"),
                     rs.getString("Senha")
                 );
@@ -270,9 +278,6 @@ public class Usuario {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
@@ -284,12 +289,11 @@ public class Usuario {
     }
 
     public void selecionarPorId() throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         
         try {
-            conexao = new Conexao().getConexao();   
+            Connection conexao = Conexao.GetConexao();   
             preparedStatement = conexao.prepareStatement("select nome, data_nascimento, email, telefone, whats, Username, Senha from usuarios WHERE cpf = ?");
 
             preparedStatement.setString(1, this.getCpf());
@@ -314,9 +318,6 @@ public class Usuario {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
             } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
@@ -325,7 +326,6 @@ public class Usuario {
     }
 
     public static boolean Deletar(String[] ids) throws Exception {
-        Connection conexao = null;
         PreparedStatement preparedStatement = null;
 
         try {
@@ -337,7 +337,7 @@ public class Usuario {
             }
             sqlBuilder.append("?)");
 
-            conexao = new Conexao().getConexao();
+            Connection conexao = Conexao.GetConexao();
             preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
 
             for (int indice = 0; indice < ids.length; indice++) {
@@ -355,9 +355,6 @@ public class Usuario {
             try {
                 if (preparedStatement != null) {
                     preparedStatement.close();
-                }
-                if (conexao != null) {
-                    conexao.close();
                 }
             } catch (Exception e) {
                 throw e;
