@@ -5,7 +5,7 @@ $(document).ready(function() {
             {
                 title: 'Selecionar',
                 render: function(data, type, row) {
-                    return `<input type="checkbox" name="select[]" class="select_row" value="${row.cpf}" />`;
+                    return `<input type="checkbox" name="select[]" class="select_row" value="${row.id}" />`;
                 },
                 width: 30,
                 orderable: false,
