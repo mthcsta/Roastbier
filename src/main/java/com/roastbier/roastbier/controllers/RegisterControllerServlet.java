@@ -69,8 +69,12 @@ public class RegisterControllerServlet extends BaseServlet {
         String senha = request.getParameter("senha");
     
         Usuario user = new Usuario(cpf, nome, data, email, telefone, whats, username, senha);
-
-        user.novo();
+        
+        if(request.getParameter("isUpdate").equals("true")){
+            user.atualizar();
+        }else{
+            user.novo();
+        }
 
         return true;
     } 

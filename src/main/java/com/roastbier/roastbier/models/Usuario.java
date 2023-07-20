@@ -92,48 +92,40 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public boolean hasUser() throws Exception{
-        Connection conexao = null;
+    public boolean hasUser(Connection conexao) throws SQLException {
         PreparedStatement preparedStatement = null;
-
-        try{
-            conexao = new Conexao().getConexao();   
-            preparedStatement = conexao.prepareStatement("select Username from usuarios WHERE Username = ? or email = ?");
+    
+        try {
+            preparedStatement = conexao.prepareStatement("SELECT Username FROM usuarios WHERE Username = ? OR email = ?");
             preparedStatement.setString(1, this.getUsuario());
             preparedStatement.setString(2, this.getEmail());
-            
+    
             ResultSet rs = preparedStatement.executeQuery();
-
-            return (rs.next());
-
-        } catch (Exception e) {
+    
+            return rs.next();
+    
+        } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         } finally {
-            try {
-                if (preparedStatement != null) {
+            if (preparedStatement != null) {
+                try {
                     preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                if (conexao != null) {
-                    conexao.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw e;
             }
         }
     }
 
-    public void novo() throws Exception{
+    public void novo() throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
-
-        boolean hasUser = hasUser();
-
-        if(!hasUser){
-            try {
-                conexao = new Conexao().getConexao();
     
+        try {
+            conexao = new Conexao().getConexao();
+    
+            if (!hasUser(conexao)) {
                 preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
                         + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
@@ -148,9 +140,48 @@ public class Usuario {
                 preparedStatement.setString(8, this.senha);
     
                 preparedStatement.execute();
+            } else {
+                throw new Exception("Username or Email already used!");
+            }
+    
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void atualizar() throws Exception {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+
+        if(!hasUser()){
+            try {
+                conexao = new Conexao().getConexao();
+    
+                preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
+                        + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
+                        + "WHERE cpf = ?");
+    
+                preparedStatement.setString(1, this.nome);
+                preparedStatement.setDate(2, this.dataNascimento);
+                preparedStatement.setString(3, this.email);
+                preparedStatement.setString(4, this.telefone);
+                preparedStatement.setBoolean(5, this.whats);
+                preparedStatement.setString(6, this.usuario);
+                preparedStatement.setString(7, this.senha);
+                preparedStatement.setString(8, this.cpf);
+    
+                preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw e;
             } finally {
                 try {
                     if (preparedStatement != null) {
@@ -161,47 +192,7 @@ public class Usuario {
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    throw e;
                 }
-            }
-        }else{
-            throw new Exception("Username or Email already used!");
-        }
-        
-    }
-
-    public void atualizar() throws Exception {
-        Connection conexao = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            conexao = new Conexao().getConexao();
-
-            preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
-                    + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
-                    + "WHERE cpf = ?");
-
-            preparedStatement.setString(1, this.nome);
-            preparedStatement.setDate(2, this.dataNascimento);
-            preparedStatement.setString(3, this.email);
-            preparedStatement.setString(4, this.telefone);
-            preparedStatement.setBoolean(5, this.whats);
-            preparedStatement.setString(6, this.usuario);
-            preparedStatement.setString(7, this.senha);
-            preparedStatement.setString(8, this.cpf);
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-                if (conexao != null) {
-                    conexao.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -290,6 +281,47 @@ public class Usuario {
         
         return lista.toArray(new Usuario[0]);
         
+    }
+
+    public void selecionarPorId() throws Exception {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        
+        try {
+            conexao = new Conexao().getConexao();   
+            preparedStatement = conexao.prepareStatement("select nome, data_nascimento, email, telefone, whats, Username, Senha from usuarios WHERE cpf = ?");
+
+            preparedStatement.setString(1, this.getCpf());
+            
+            rs = preparedStatement.executeQuery();
+            
+            if(rs.next()){
+                    this.setNome(rs.getString("nome"));
+                    this.setDataNascimento(rs.getDate("data_nascimento"));
+                    this.setEmail(rs.getString("email"));
+                    this.setTelefone(rs.getString("telefone"));
+                    this.setWhats(Boolean.parseBoolean(rs.getString("whats")));
+                    this.setUsuario(rs.getString("Username"));
+                    this.setSenha(rs.getString("Senha"));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw e;
+            }
+        }  
     }
 
     public static boolean Deletar(String[] ids) throws Exception {
