@@ -5,19 +5,17 @@
 
 <%
     Pedido pedido = new Pedido();
-    boolean update = false;
 
     if(request.getParameter("id") != null){
-        pedido.setNumero(request.getParameter("id"));
+        pedido.setNumero(Integer.parseInt(request.getParameter("id")));
         pedido.selecionarPorId();
-        update = true;
     }
 %>
 <form id="myForm" method="POST" action="<%=System.getProperty("BASE_URL")%>/register?m=order" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
-    <input type="hidden" name="isUpdate" value="<%=update%>">
+    <input type="hidden" name="isUpdate" value="<%=request.getAttribute("update")%>">
     <div>
         <input type="hidden" id="id" name="id" value="<%=pedido.getNumero()%>">
     </div>
@@ -76,6 +74,6 @@
             </tbody>
         </table>
     </div>
-    <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
 <script defer src="src/scripts/register/order.js" language="javascript" type="text/javascript"></script>

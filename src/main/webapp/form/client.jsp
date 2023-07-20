@@ -1,13 +1,10 @@
-<%@ page import="com.roastbier.roastbier.models.Cliente"%>
+<%@ page import="com.roastbier.roastbier.models.Cliente" %>
 
 <%
     Cliente client = new Cliente();
-    boolean update = false;
-
     if(request.getParameter("id") != null){
         client.setNumero(request.getParameter("id"));
         client.selecionarPorId();
-        update = true;
     }
 %>
 
@@ -15,7 +12,7 @@
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
-    <input type="hidden" name="isUpdate" value="<%=update%>">
+    <input type="hidden" name="isUpdate" value="<%=request.getAttribute("update")%>">
     <div>
         <input type="text" id="id" value="<%=client.getId()%>" hidden>
     </div>
@@ -90,6 +87,6 @@
         <input type="text" id="estado" name="estado" maxlength="2" value="<%=client.getEstado()%>">
     </div>
     <br>
-    <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
 <script defer src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>

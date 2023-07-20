@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebServlet(name = "DeletarControllerServlet", value = "/delete")
 public class DeletarControllerServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String model = request.getParameter("m");

@@ -67,6 +67,24 @@ public class Cliente {
         this.cep = cep;
     }
 
+    public Cliente() {
+        this.id = -1;
+        this.cpf = "";
+        this.nome = "";
+        this.dataNascimento = null;
+        this.rg = "";
+        this.orgaoEmissor = "";
+        this.email = "";
+        this.telefone = "telefone";
+        this.whats = false;
+        this.logradouro = "";
+        this.numero = "";
+        this.bairro = "";
+        this.cidade = "";
+        this.estado = "";
+        this.cep = "";
+    }
+
      // Getters
      public int getId() {
         return id;

@@ -2,13 +2,11 @@
 <%@ page import="com.roastbier.roastbier.models.Produto"%>
 
 <%
-    Produto Produto = new Produto();
-    boolean update = false;
+    Produto produto = new Produto();
 
     if(request.getParameter("id") != null){
-        produto.setId(request.getParameter("id"));
+        produto.setId(Integer.parseInt(request.getParameter("id")));
         produto.selecionarPorId();
-        update = true;
     }
 %>
 
@@ -16,7 +14,7 @@
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
-    <input type="hidden" name="isUpdate" value="<%=update%>">
+    <input type="hidden" name="isUpdate" value="<%=request.getAttribute("update")%>">
     <div>
         <input type="text" id="id" name="id" value="<%=produto.getId()%>" hidden>
     </div>
@@ -42,8 +40,8 @@
     <br>
     <div>
         <label for="precoUnitario">Unity Price:</label>
-        <input type="number" name="precoUnitario" id="precoUnitario" value="<%=produto.getPrecoUnidade()%>" required>
+        <input type="number" name="precoUnitario" id="precoUnitario" value="<%=produto.getPrecoUnitario()%>" required>
     </div>
-    <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
 <script defer src="src/scripts/register/product.js" language="javascript" type="text/javascript"></script>

@@ -14,9 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "ListarControllerServlet", value = "/list")
-public class ListarControllerServlet extends HttpServlet {
+public class ListarControllerServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("AAAAAAAAAAAAA");
         RequestDispatcher rd=request.getRequestDispatcher("list.jsp");
         rd.forward(request, response);
     }

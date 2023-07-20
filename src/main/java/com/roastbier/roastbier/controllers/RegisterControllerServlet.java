@@ -22,6 +22,7 @@ public class RegisterControllerServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("update", request.getParameter("id") != null);
         RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
         rd.forward(request, response);
     }

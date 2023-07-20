@@ -2,22 +2,20 @@
 
 <%
     Usuario usuario = new Usuario();
-    boolean update = false;
 
     if(request.getParameter("id") != null){
         usuario.setCpf(request.getParameter("id"));
         usuario.selecionarPorId();
-        update = true;
     }
 %>
 <form id="myForm" method="POST" action="<%=System.getProperty("BASE_URL")%>/register?m=user" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
-    <input type="hidden" name="isUpdate" value="<%=update%>">
+    <input type="hidden" name="isUpdate" value="<%=request.getAttribute("update")%>">
     <div>
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" maxlength="15" value="<%=usuario.getCpf()%>" <%=(update) ? "readonly" : "" %> required>
+        <input type="text" id="cpf" name="cpf" maxlength="15" value="<%=usuario.getCpf()%>" <%=((boolean) request.getAttribute("update")) ? "readonly" : "" %> required>
     </div>
     <br>
     <div>
@@ -51,10 +49,10 @@
     </div>
     <br>
     <div>
-        <label for="senha"><%=(update) ? "New Password" : "Password" %>:</label>
-        <input type="text" id="senha" name="senha" maxlength="255" <%=(update) ? "" : "required" %>>
+        <label for="senha"><%=((boolean) request.getAttribute("update")) ? "New Password" : "Password" %>:</label>
+        <input type="text" id="senha" name="senha" maxlength="255" <%=((boolean) request.getAttribute("update")) ? "" : "required" %>>
     </div>
     <br>
-    <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
 <script defer src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>

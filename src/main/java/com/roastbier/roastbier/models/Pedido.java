@@ -31,6 +31,13 @@ public class Pedido {
         this.valorFrete = valorFrete;
         this.clienteId = clienteId;
     }
+    public Pedido() {
+        this.numero = 0;
+        this.dataEmissao = null;
+        this.dataEntrega = null;
+        this.valorFrete = 0.0f;
+        this.clienteId = 0;
+    }
 
      // Getters
      public int getNumero() {
