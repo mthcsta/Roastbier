@@ -1,10 +1,8 @@
 $(document).ready(function() {
 
     $("#btn-insert").on("click", function() {
-        window.location.href = $("#btn-update").attr("href") + '&id=' + $(".select_row:checked").val();
+        window.location.href = $("#btn-update").attr("href");
     });
-
-    const updateUrl = $("#btn-update").attr("href");
 
     $("#btn-update").on("click", function(){
         if ($(".select_row:checked").length == 0) {
