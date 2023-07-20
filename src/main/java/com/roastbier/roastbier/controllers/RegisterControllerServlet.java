@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 
+@Logado()
 @WebServlet(name = "RegisterControllerServlet", value = "/register")
 public class RegisterControllerServlet extends BaseServlet {
 

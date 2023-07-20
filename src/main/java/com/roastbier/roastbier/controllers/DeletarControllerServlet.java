@@ -7,6 +7,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+@Logado()
 @WebServlet(name = "DeletarControllerServlet", value = "/delete")
 public class DeletarControllerServlet extends HttpServlet {
 

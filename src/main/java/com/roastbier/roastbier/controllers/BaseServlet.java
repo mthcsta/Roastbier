@@ -5,13 +5,17 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+@Logado
 @WebServlet(name = "BaseServlet", value = "/BaseServlet")
 public class BaseServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (getClass().isAnnotationPresent(Logado.class) && req.getSession().getAttribute("cpf") == null) {
+            resp.sendRedirect(System.getProperty("BASE_URL") + "/login");
+            return;
+        }
         super.service(req, resp);
-        System.out.println(getClass().toString());
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {

@@ -13,6 +13,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+@Logado()
 @WebServlet(name = "ListarControllerServlet", value = "/list")
 public class ListarControllerServlet extends BaseServlet {
     @Override
