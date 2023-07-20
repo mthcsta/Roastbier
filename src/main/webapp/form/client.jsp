@@ -49,7 +49,7 @@
     <div>
         <label for="telefone">Phone:</label>
         <br>
-        <textarea id="telefone" name="telefone" maxlength="13" value="<%=client.getTelefone()%>"></textarea>
+        <input type="text" id="telefone" name="telefone" maxlength="13" value="<%=client.getTelefone()%>">
     </div>
     <br>
     <div>
