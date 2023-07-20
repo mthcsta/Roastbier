@@ -5,7 +5,7 @@
     boolean update = false;
 
     if(request.getParameter("id") != null){
-        usuario.setId(request.getParameter("id"));
+        usuario.setCpf(request.getParameter("id"));
         usuario.selecionarPorId();
         update = true;
     }
@@ -42,7 +42,7 @@
     <br>
     <div>
         <label for="whats">WhatsApp:</label>
-        <input type="checkbox" id="whats" name="whats" value="1" value="<%=usuario.getWhats()%>">
+        <input type="checkbox" id="whats" name="whats" value="1" <%=usuario.getWhats() ? "checked" : ""%>>
     </div>
     <br>
     <div>
@@ -51,10 +51,10 @@
     </div>
     <br>
     <div>
-        <label for="senha">Password:</label>
-        <input type="text" id="senha" name="senha" maxlength="255" required>
+        <label for="senha"><%=(update) ? "New Password" : "Password" %>:</label>
+        <input type="text" id="senha" name="senha" maxlength="255" <%=(update) ? "" : "required" %>>
     </div>
     <br>
-    <input type="submit" value="<%=(isUpdate) ? "Update" : "Insert" %>" class="btn btn-primary">
+    <input type="submit" value="<%=(update) ? "Update" : "Insert" %>" class="btn btn-primary">
 </form>
 <script src="src/scripts/register/user.js" language="javascript" type="text/javascript"></script>

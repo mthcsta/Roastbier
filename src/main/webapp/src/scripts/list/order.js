@@ -69,7 +69,7 @@ function formatTr(productData) {
     return `
     <tr>
         <td>${productData.produto.nome}</td>
-        <td>${productData.precoUnitario}</td>
+        <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(productData.precoUnitario)}</td>
         <td>${productData.quantidade}</td>
     </tr>
     `

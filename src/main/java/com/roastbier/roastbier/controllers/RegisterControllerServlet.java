@@ -30,7 +30,11 @@ public class RegisterControllerServlet extends BaseServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             doRegisterByModel(request.getParameter("m"), request);
-            request.setAttribute("message", "Registro inserido com sucesso!");
+            if (request.getParameter("isUpdate").equals("true")) {
+                request.setAttribute("message", "Registro atualizado com sucesso!");
+            } else {
+                request.setAttribute("message", "Registro inserido com sucesso!");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", true);
@@ -64,7 +68,7 @@ public class RegisterControllerServlet extends BaseServlet {
         Date data = Date.valueOf(request.getParameter("dataNascimento"));
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
-        Boolean whats = request.getParameter("whats").equals("1");
+        Boolean whats = request.getParameter("whats") != null;
         String username = request.getParameter("username");
         String senha = request.getParameter("senha");
     

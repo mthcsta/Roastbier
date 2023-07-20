@@ -28,6 +28,10 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario() {
+
+    }
+
     public String getCpf() {
         return cpf;
     }
@@ -182,20 +186,34 @@ public class Usuario {
                 if(hasUser(this.cpf)){
                     throw new Exception("Username or Email already used!");
                 }
-    
-                preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
-                        + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
-                        + "WHERE cpf = ?");
-    
-                preparedStatement.setString(1, this.nome);
-                preparedStatement.setDate(2, this.dataNascimento);
-                preparedStatement.setString(3, this.email);
-                preparedStatement.setString(4, this.telefone);
-                preparedStatement.setBoolean(5, this.whats);
-                preparedStatement.setString(6, this.usuario);
-                preparedStatement.setString(7, this.senha);
-                preparedStatement.setString(8, this.cpf);
-    
+
+                if (this.senha == null || this.senha.equals("")) {
+                    preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
+                            + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?"
+                            + "WHERE cpf = ?");
+
+                    preparedStatement.setString(1, this.nome);
+                    preparedStatement.setDate(2, this.dataNascimento);
+                    preparedStatement.setString(3, this.email);
+                    preparedStatement.setString(4, this.telefone);
+                    preparedStatement.setBoolean(5, this.whats);
+                    preparedStatement.setString(6, this.usuario);
+                    preparedStatement.setString(7, this.cpf);
+                } else {
+                    preparedStatement = conexao.prepareStatement("UPDATE `usuarios` "
+                            + "SET nome = ?, data_nascimento = ?, email = ?, telefone = ?, whats = ?, Username = ?, Senha = md5(?)"
+                            + "WHERE cpf = ?");
+
+                    preparedStatement.setString(1, this.nome);
+                    preparedStatement.setDate(2, this.dataNascimento);
+                    preparedStatement.setString(3, this.email);
+                    preparedStatement.setString(4, this.telefone);
+                    preparedStatement.setBoolean(5, this.whats);
+                    preparedStatement.setString(6, this.usuario);
+                    preparedStatement.setString(7, this.senha);
+                    preparedStatement.setString(8, this.cpf);
+                }
+
                 preparedStatement.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -305,7 +323,7 @@ public class Usuario {
                     this.setDataNascimento(rs.getDate("data_nascimento"));
                     this.setEmail(rs.getString("email"));
                     this.setTelefone(rs.getString("telefone"));
-                    this.setWhats(Boolean.parseBoolean(rs.getString("whats")));
+                    this.setWhats(rs.getBoolean("whats"));
                     this.setUsuario(rs.getString("Username"));
                     this.setSenha(rs.getString("Senha"));
             }
