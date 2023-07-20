@@ -2,7 +2,7 @@ $(document).ready(function() {
     const datatable = $("#table_search").DataTable({
         columns: [
             {
-                title: 'Selecionar',
+                title: 'Select',
                 render: function(data, type, row) {
                     return `<input type="checkbox" name="select[]" class="select_row" value="${row.cpf}" />`;
                 },
@@ -10,10 +10,23 @@ $(document).ready(function() {
                 orderable: false,
                 class: "text-center"
             },
-            { title: 'Numero', data: 'numero' },
-            { title: 'Data Emissao', data: 'dataEmissao' },
-            { title: 'Data Entrega', data: 'dataEntrega' },
-            { title: 'Valor Frete', data: 'valorFrete' },
+            { title: 'Order Number', data: 'numero' },
+            { title: 'Issue Date', data: 'dataEmissao' },
+            { title: 'Delivery Date', data: 'dataEntrega' },
+            {
+                title: 'Freight Value',
+                render: function(data, type, row) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(data);
+                },
+                data: 'valorFrete'
+            },
+            {
+                title: 'Total Value',
+                render: function(data, type, row) {
+                    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(data);
+                },
+                data: 'precoTotal'
+            },
             { title: 'Client Name', data: 'cliente.nome' },
         ],
         columnDefs: [{ targets: 0, orderable: false}],

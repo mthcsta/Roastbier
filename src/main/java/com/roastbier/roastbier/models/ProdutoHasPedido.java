@@ -5,6 +5,8 @@ import com.roastbier.roastbier.enums.UnidadeMedida;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoHasPedido {
     private int produtoId;
@@ -12,6 +14,7 @@ public class ProdutoHasPedido {
     private int quantidade;
     private float precoUnitario;
     private UnidadeMedida unidade;
+    private Produto produto;
 
     public ProdutoHasPedido(int produtoId, int pedidoNumero, int quantidade, float precoUnitario, UnidadeMedida unidade) {
         this.produtoId = produtoId;
@@ -45,6 +48,14 @@ public class ProdutoHasPedido {
         public UnidadeMedida getUnidade() {
             return unidade;
         }
+
+        public Produto getProduto() {
+            if (produto == null) {
+                this.produto = new Produto(produtoId);
+                this.produto.selecionarPorId();
+            }
+            return produto;
+        }
     
         // Setters
         public void setProdutoId(int produtoId) {
@@ -65,6 +76,10 @@ public class ProdutoHasPedido {
     
         public void setUnidade(UnidadeMedida unidade) {
             this.unidade = unidade;
+        }
+
+        public void setProduto(Produto produto) {
+            this.produto = produto;
         }
 
     public void novo() throws Exception {
@@ -100,5 +115,49 @@ public class ProdutoHasPedido {
                 throw e;
             }
         }
+    }
+
+    public static ProdutoHasPedido[] ListarPorPedido(int pedidoNumero) {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<ProdutoHasPedido> lista = new ArrayList();
+
+        try {
+            conexao = new Conexao().getConexao();
+
+            preparedStatement = conexao.prepareStatement("select Produtos_id, Pedidos_numero, quantidade, preco_unitario, unidade from produtos_has_pedidos WHERE Pedidos_numero = ?");
+
+            preparedStatement.setInt(1, pedidoNumero);
+
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                ProdutoHasPedido productHasOrder = new ProdutoHasPedido(
+                        rs.getInt("Produtos_id"),
+                        rs.getInt("Pedidos_numero"),
+                        rs.getInt("quantidade"),
+                        rs.getFloat("preco_unitario"),
+                        UnidadeMedida.getByAbreviacao(rs.getString("unidade"))
+                );
+                lista.add(productHasOrder);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+        return lista.toArray(new ProdutoHasPedido[0]);
     }
 }

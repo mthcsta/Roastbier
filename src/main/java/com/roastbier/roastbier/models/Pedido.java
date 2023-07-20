@@ -13,6 +13,8 @@ public class Pedido {
     private Float valorFrete;
     private int clienteId;
     private Cliente cliente;
+    private ProdutoHasPedido[] produtoHasPedidos;
+    private Float precoTotal;
 
     public Pedido(Date dataEmissao, Date dataEntrega, Float valorFrete, int clienteId) {
         this.dataEmissao = dataEmissao;
@@ -58,6 +60,24 @@ public class Pedido {
         return cliente;
     }
 
+    public ProdutoHasPedido[] getProdutoHasPedidos() {
+        if (produtoHasPedidos == null) {
+            this.produtoHasPedidos = ProdutoHasPedido.ListarPorPedido(numero);
+        }
+        return produtoHasPedidos;
+    }
+
+    public Float getPrecoTotal() {
+        if (precoTotal == null) {
+            this.precoTotal = valorFrete;
+            for (ProdutoHasPedido produtoHasPedido : getProdutoHasPedidos()) {
+                this.precoTotal += produtoHasPedido.getPrecoUnitario() * produtoHasPedido.getQuantidade();
+            }
+        }
+        return precoTotal;
+    }
+
+
     // Setters
     public void setNumero(int numero) {
         this.numero = numero;
@@ -81,6 +101,10 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void setProdutoHasPedidos(ProdutoHasPedido[] produtoHasPedidos) {
+        this.produtoHasPedidos = produtoHasPedidos;
     }
     
     public void novo() throws Exception{

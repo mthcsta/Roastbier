@@ -8,11 +8,11 @@ $(document).ready(function() {
 
     $("#btn-update").on("click", function(){
         if ($(".select_row:checked").length == 0) {
-            alert('Você precisa selecionar um registro')
+            alert('You need to select a record')
             return;
         }
         if ($(".select_row:checked").length > 1) {
-            alert('Você só pode selecionar 1 registro')
+            alert('You can only select one record')
             return;
         }
 
@@ -22,6 +22,12 @@ $(document).ready(function() {
     $("#btn-delete").on("click", function() {
         const selectedRows = $(".select_row").serializeArray();
         const url = new URLSearchParams(window.location.search);
+
+        if (selectedRows.length == 0) {
+            alert('You need to select at least one record');
+            return;
+        }
+
         selectedRows.forEach((selectedRow) => {
             url.append('delete[]', selectedRow.value);
         })

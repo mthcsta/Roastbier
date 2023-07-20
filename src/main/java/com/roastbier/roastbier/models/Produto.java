@@ -30,6 +30,10 @@ public class Produto {
         this.precoUnitario = precoUnitario;
     }
 
+    public Produto(int id){
+        this.id = id;
+    }
+
     public Produto(){
 
     }
@@ -147,6 +151,45 @@ public class Produto {
                 throw e;
             }
         }
+    }
+
+    public void selecionarPorId() {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement("select id, nome, descricao, unidade, preco_unitario from produtos WHERE id = ?");
+
+            preparedStatement.setInt(1, this.id);
+
+            rs = preparedStatement.executeQuery();
+
+            if (!rs.next()) {
+                return;
+            }
+
+            this.setNome(rs.getString("nome"));
+            this.setDescricao(rs.getString("descricao"));
+            this.setUnidade(UnidadeMedida.getByAbreviacao(rs.getString("unidade")));
+            this.setPrecoUnitario(rs.getFloat("preco_unitario"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
     }
 
     public static Produto[] Listar(String search) throws Exception {
