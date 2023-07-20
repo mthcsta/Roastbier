@@ -6,7 +6,7 @@
 
     <listener>
         <listener-class>
-            com.roastbier.roastbier.DotenvContextListener
+            com.roastbier.roastbier.OnInitServer
         </listener-class>
     </listener>
 

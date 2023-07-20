@@ -6,6 +6,7 @@ import java.sql.SQLException;
 public class Conexao {
 
     private Connection connection;
+    private static Conexao conexaoInstancia;
 
     public void startConnection() {
         try {
@@ -18,20 +19,27 @@ public class Conexao {
         }
     }
 
-    public Connection getConexao() {
-        try {
-            if (connection == null || connection.isClosed()) {
-                startConnection();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public Connection getConexao() throws SQLException {
+        if (conexaoInstancia.getConexao().isClosed()) {
+            conexaoInstancia.startConnection();
         }
         return connection;
     }
 
-    public void destroyConnection() {
+    public static Connection GetConexao() throws SQLException {
+        return conexaoInstancia.getConexao();
+    }
+
+    public static Conexao GetInstancia() {
+        if (conexaoInstancia == null) {
+            conexaoInstancia = new Conexao();
+        }
+        return conexaoInstancia;
+    }
+
+    public static void DestroyConnection() {
         try {
-            connection.close();
+            conexaoInstancia.getConexao().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
