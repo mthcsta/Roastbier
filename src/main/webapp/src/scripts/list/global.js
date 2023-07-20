@@ -26,6 +26,10 @@ $(document).ready(function() {
             return;
         }
 
+        if (!confirm("Are you sure you want to delete selected records?")) {
+            return;
+        }
+
         selectedRows.forEach((selectedRow) => {
             url.append('delete[]', selectedRow.value);
         })
