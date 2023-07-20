@@ -20,14 +20,14 @@ public class Conexao {
     }
 
     public Connection getConexao() throws SQLException {
-        if (conexaoInstancia.getConexao().isClosed()) {
-            conexaoInstancia.startConnection();
+        if (connection == null || connection.isClosed()) {
+            GetInstancia().startConnection();
         }
         return connection;
     }
 
     public static Connection GetConexao() throws SQLException {
-        return conexaoInstancia.getConexao();
+        return GetInstancia().getConexao();
     }
 
     public static Conexao GetInstancia() {
@@ -39,7 +39,7 @@ public class Conexao {
 
     public static void DestroyConnection() {
         try {
-            conexaoInstancia.getConexao().close();
+            GetInstancia().getConexao().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
