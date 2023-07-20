@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "LoginControllerServlet", value = "/login")
-public class LoginControllerServlet extends HttpServlet {
+public class LoginControllerServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd=request.getRequestDispatcher("login.jsp");

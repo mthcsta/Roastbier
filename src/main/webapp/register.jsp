@@ -15,7 +15,7 @@
                 <div class="container">
                     <br>
                     <h1 class="title">
-                        <%=request.getParameter("form")%> Register
+                        <%=request.getParameter("form")%> <%=((boolean) request.getAttribute("update")) ? "Update" : "Register" %>
                     </h1>
                     <hr>
                     <div class="box">

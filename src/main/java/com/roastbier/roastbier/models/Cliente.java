@@ -391,9 +391,7 @@ public class Cliente {
 
             rs = preparedStatement.executeQuery();
 
-            System.out.println("AAAA");
             while (rs.next()) {
-                System.out.println(rs.getInt("id"));
                 Cliente client = new Cliente(
                         rs.getInt("id"),
                         rs.getString("cpf"),
@@ -411,7 +409,6 @@ public class Cliente {
                         rs.getString("estado"),
                         rs.getString("cep")
                 );
-                System.out.println(client);
                 lista.add(client);
             }
 
@@ -451,8 +448,6 @@ public class Cliente {
             for (int indice = 0; indice < ids.length; indice++) {
                 preparedStatement.setInt(indice + 1, Integer.parseInt(ids[indice]));
             }
-
-            System.out.println(preparedStatement.toString());
 
             preparedStatement.executeUpdate();
 

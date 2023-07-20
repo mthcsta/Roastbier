@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @Logado()
 @WebServlet(name = "DeletarControllerServlet", value = "/delete")
-public class DeletarControllerServlet extends HttpServlet {
+public class DeletarControllerServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

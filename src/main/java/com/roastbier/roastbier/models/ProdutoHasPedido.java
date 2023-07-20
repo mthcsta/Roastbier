@@ -201,8 +201,6 @@ public class ProdutoHasPedido {
             preparedStatement.setInt(1, this.getPedidoNumero());
             preparedStatement.setInt(2, this.getProdutoId());
 
-            System.out.println(preparedStatement.toString());
-
             rs = preparedStatement.executeQuery();
 
             if(!rs.next()){
@@ -237,8 +235,6 @@ public class ProdutoHasPedido {
 
             preparedStatement.setInt(1, this.getPedidoNumero());
             preparedStatement.setInt(2, this.getProdutoId());
-
-            System.out.println(preparedStatement.toString());
 
             rs = preparedStatement.executeQuery();
 

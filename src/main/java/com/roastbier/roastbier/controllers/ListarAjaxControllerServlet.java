@@ -12,8 +12,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+@Logado
 @WebServlet(name = "ListarAjaxControllerServlet", value = "/ajax/list")
-public class ListarAjaxControllerServlet extends HttpServlet {
+public class ListarAjaxControllerServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String model = request.getParameter("m");

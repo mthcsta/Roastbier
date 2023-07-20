@@ -18,8 +18,4 @@ public class BaseServlet extends HttpServlet {
         super.service(req, resp);
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("KKKKKKKKK");
-    }
-
 }

@@ -210,7 +210,6 @@ public class Pedido {
                     rs.getFloat("valor_frete"),
                     rs.getInt("Clientes_id")
                 );
-                System.out.println(order);
                 lista.add(order);
             }
 
