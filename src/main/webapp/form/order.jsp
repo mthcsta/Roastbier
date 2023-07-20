@@ -21,17 +21,17 @@
     </div>
     <div>
         <label for="dataEmissao">Issue Date:</label>
-        <input type="date" id="dataEmissao" name="dataEmissao" placeholder="dd/mm/yyyy" value="<%=pedido.getDataEmissao()%> required>
+        <input type="date" id="dataEmissao" name="dataEmissao" value="<%=pedido.getDataEmissao()%>" placeholder="dd/mm/yyyy" required>
     </div>
     <br>
     <div>
         <label for="dataEntrega">Delivery Date:</label>
-        <input type="date" id="dataEntrega" name="dataEntrega" placeholder="dd/mm/yyyy" value="<%=pedido.getDataEntrega()%> required>
+        <input type="date" id="dataEntrega" name="dataEntrega" value="<%=pedido.getDataEntrega()%>" placeholder="dd/mm/yyyy" required>
     </div>
     <br>
     <div>
         <label for="valorFrete">Freight Value:</label>
-        <input type="number" id="valorFrete" name="valorFrete" maxlength="100" value="<%=pedido.getValorFrete()%> required>
+        <input type="number" id="valorFrete" name="valorFrete" maxlength="100" value="<%=pedido.getValorFrete()%>" required>
     </div>
     <br>
     <div>
