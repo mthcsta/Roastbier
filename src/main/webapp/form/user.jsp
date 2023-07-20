@@ -34,7 +34,7 @@
     </div>
     <br>
     <div>
-        <label for="telefone">Phone:</label>
+        <label for="telefone">Phone Number:</label>
         <input type="text" id="telefone" name="telefone" maxlength="16" value="<%=usuario.getTelefone()%>">
     </div>
     <br>

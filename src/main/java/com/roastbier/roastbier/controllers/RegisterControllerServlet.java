@@ -94,7 +94,7 @@ public class RegisterControllerServlet extends BaseServlet {
         String orgaoEmissor = request.getParameter("orgaoEmissor");
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
-        Boolean whats = Boolean.parseBoolean(request.getParameter("whats"));
+        Boolean whats = request.getParameter("whats") != null;
         String logradouro = request.getParameter("logradouro");
         String numero = request.getParameter("numero");
         String bairro = request.getParameter("bairro");

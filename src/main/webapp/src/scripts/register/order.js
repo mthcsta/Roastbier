@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $(".produtoId").on("click", function(){
         let id = $(this).val();
-        $(`.produtoData-${id}`).attr("disabled", !$(this).is(":checked"));
+        setTimeout(() => $(`.produtoData-${id}`).attr("disabled", !$(this).is(":checked")), 100);
     });
 
     function calculaPedidoTotal() {
@@ -57,11 +57,19 @@ function validar() {
         $("#precoUnitario").css("background-color",""); 
     }
 
-    // Se a página foi validada com sucesso, muda para a página de success.
-
-    if (!retorno) {
-      alert("retorno false");
+    if ($(".produtoId:checked").length == 0) {
+        retorno = erroValidacao("You must select at least one product for the order.", "");
+    } else {
+        $("#precoUnitario").css("background-color","");
     }
 
+    // Se a página foi validada com sucesso, muda para a página de success.
+
     return retorno;
+}
+function erroValidacao(msg, element){
+    $("#erros").append("<li>" + msg + "</li>");
+    $(element).css("background-color","#FF0000");
+    $(element).focus();
+    return false;
 }

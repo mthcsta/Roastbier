@@ -16,9 +16,9 @@ $(document).ready(function() {
             { title: 'Birthday', data: 'dataNascimento' }, 
             { title: 'CPF', data: 'cpf' }, 
             { title: 'RG', data: 'rg' }, 
-            { title: 'Orgão Emissor', data: 'orgaoEmissor' }, 
+            { title: 'Issuing Agency', data: 'orgaoEmissor' },
             { title: 'Email', data: 'email' }, 
-            { title: 'Cellphone', data: 'telefone' },
+            { title: 'Phone Number', data: 'telefone' },
             {
                 title: 'Has Whatsapp?',
                 render: function(data, type, row) {

@@ -64,7 +64,7 @@
                     produtoHasPedido.selecionarPorIdENumero();
             %>
                     <tr>
-                        <td><input type="checkbox" class="produtoId" name="produtoId[]" value="<%=produto.getId()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "checked" : ""%>></td>
+                        <td><input type="checkbox" class="produtoId" name="produtoId[]" value="<%=produto.getId()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "checked onclick=\"return false;\"" : ""%>></td>
                         <td><%=produto.getNome()%></td>
                         <td><%=produto.getPrecoUnitario()%></td>
                         <td>

@@ -75,7 +75,7 @@ public class Cliente {
         this.rg = "";
         this.orgaoEmissor = "";
         this.email = "";
-        this.telefone = "telefone";
+        this.telefone = "";
         this.whats = false;
         this.logradouro = "";
         this.numero = "";
@@ -355,7 +355,7 @@ public class Cliente {
                 this.setOrgaoEmissor(rs.getString("orgao_emissor"));
                 this.setEmail(rs.getString("email"));
                 this.setTelefone(rs.getString("telefone"));
-                this.setWhats(Boolean.parseBoolean(rs.getString("whats")));
+                this.setWhats(rs.getBoolean("whats"));
                 this.setLogradouro(rs.getString("logradouro"));
                 this.setNumero(rs.getString("numero"));
                 this.setBairro(rs.getString("bairro"));
@@ -403,7 +403,7 @@ public class Cliente {
                         rs.getString("orgao_emissor"),
                         rs.getString("email"),
                         rs.getString("telefone"),
-                        Boolean.parseBoolean(rs.getString("whats")),
+                        rs.getBoolean("whats"),
                         rs.getString("logradouro"),
                         rs.getString("numero"),
                         rs.getString("bairro"),

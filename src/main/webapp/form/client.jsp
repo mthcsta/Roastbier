@@ -28,7 +28,7 @@
     <br>
     <div>
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" maxlength="11" value="<%=client.getCpf()%>" required>
+        <input type="text" id="cpf" name="cpf" maxlength="15" value="<%=client.getCpf()%>" required>
     </div>
     <br>
     <div>
@@ -47,14 +47,14 @@
     </div>
     <br>
     <div>
-        <label for="telefone">Phone:</label>
+        <label for="telefone">Phone Number:</label>
         <br>
-        <input type="text" id="telefone" name="telefone" maxlength="13" value="<%=client.getTelefone()%>">
+        <input type="text" id="telefone" name="telefone" maxlength="16" value="<%=client.getTelefone()%>">
     </div>
     <br>
     <div>
         <label for="whats">WhatsApp:</label>
-        <input type="checkbox" id="whats" name="whats" value="1" value="<%=client.getWhats()%>">
+        <input type="checkbox" id="whats" name="whats" value="1" <%=client.getWhats() ? "checked" : ""%>>
     </div>
     <br>
     <div>
