@@ -152,4 +152,37 @@ public class ProdutoHasPedido {
 
         return lista.toArray(new ProdutoHasPedido[0]);
     }
+
+    public void selecionarPorIdENumero() {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conexao = Conexao.GetConexao();
+
+            preparedStatement = conexao.prepareStatement("select Produtos_id, Pedidos_numero, quantidade, preco_unitario, unidade from produtos_has_pedidos WHERE Pedidos_numero = ? and Produtos_id = ?");
+
+            preparedStatement.setInt(1, this.pedidoNumero);
+            preparedStatement.setInt(1, this.produtoId);
+
+            rs = preparedStatement.executeQuery();
+
+            if(rs.next()){
+                        this.setQuantidade(rs.getInt("quantidade"));
+                        this.setPrecoUnitario(rs.getFloat("preco_unitario"));
+                        this.setUnidade(UnidadeMedida.getByAbreviacao(rs.getString("unidade")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+    }
 }

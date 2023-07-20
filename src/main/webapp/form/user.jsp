@@ -5,7 +5,7 @@
     boolean update = false;
 
     if(request.getParameter("id") != null){
-        usuario.setCpf(request.getParameter("id"));
+        usuario.setId(request.getParameter("id"));
         usuario.selecionarPorId();
         update = true;
     }

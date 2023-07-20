@@ -14,6 +14,7 @@ public class Pedido {
     private int clienteId;
     private Cliente cliente;
     private ProdutoHasPedido[] produtoHasPedidos;
+    private ProdutoHasPedido phasp;
     private Float precoTotal;
 
     public Pedido(Date dataEmissao, Date dataEntrega, Float valorFrete, int clienteId) {
@@ -256,6 +257,39 @@ public class Pedido {
                 throw e;
             }
         }
+    }
+
+    public void selecionarPorId() {
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            Connection conexao = Conexao.GetConexao();
+            preparedStatement = conexao.prepareStatement("select numero, data_emissao, data_entrega, valor_frete, Cliente_id from clientes WHERE numero = ?");
+
+            preparedStatement.setInt(1, this.getNumero());
+
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                this.setDataEmissao(rs.getDate("data_emissao"));
+                this.setDataEntrega(rs.getDate("data_entrega"));
+                this.setValorFrete(rs.getFloat("valor_frete"));
+                this.setClienteId((rs.getInt("Cliente_id")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
     }
 
 }
