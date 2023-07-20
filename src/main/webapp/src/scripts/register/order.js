@@ -2,7 +2,26 @@ $(document).ready(function(){
     $(".produtoId").on("click", function(){
         let id = $(this).val();
         $(`.produtoData-${id}`).attr("disabled", !$(this).is(":checked"));
-    })
+    });
+
+    function calculaPedidoTotal() {
+        const produtos = [...$(".produtoId:checked")].map((produtoId) => produtoId.value);
+        const pedidoTotal = produtos.map((produtoId) => {
+            const info = $(`.produtoData-${produtoId}[name='quantidade[]']`);
+            const produtoPreco = info.data('produto-preco');
+            const quantidade = info.val();
+
+            $("#produtoTotal-" + produtoId).html(new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(quantidade * produtoPreco));
+
+            return produtoPreco * quantidade
+        }).reduce((acc, val) => acc + val, 0);
+
+        $("#pedidoTotal").html(new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(pedidoTotal))
+    }
+
+    $(document).on('keyup', ".produto-quantidade", calculaPedidoTotal);
+
+    calculaPedidoTotal();
 });
 
 function validar() {

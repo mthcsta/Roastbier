@@ -35,7 +35,11 @@ public class Produto {
     }
 
     public Produto(){
-
+        this.id = 0;
+        this.nome = "";
+        this.descricao = "";
+        this.unidade = UnidadeMedida.UNIDADE;
+        this.precoUnitario = 0.0f;
     }
 
      // Getters

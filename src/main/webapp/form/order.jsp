@@ -51,6 +51,7 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Total</th>
             </thead>
             <tbody>
             <%
@@ -65,13 +66,22 @@
                         <td><%=produto.getNome()%></td>
                         <td><%=produto.getPrecoUnitario()%></td>
                         <td>
-                            <input type="number" class="produtoData-<%=produto.getId()%>" name="quantidade[]" class="produtoData-<%=produto.getId()%>" maxlength="3000" value="<%=produtoHasPedido.getQuantidade()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
-                            <input type="hidden" class="produtoData-<%=produto.getId()%>" name="preco[]" class="produtoData-<%=produto.getId()%>" value="<%=produto.getPrecoUnitario()%>" maxlength="3000" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
+                            <input type="number" class="produto-quantidade produtoData-<%=produto.getId()%>" data-produto-id="<%=produto.getId()%>" data-produto-preco="<%=produto.getPrecoUnitario()%>" name="quantidade[]" maxlength="3000" value="<%=produtoHasPedido.getQuantidade()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
+                            <input type="hidden" class="produtoData-<%=produto.getId()%>" name="preco[]" value="<%=produto.getPrecoUnitario()%>" maxlength="3000" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
                             <input type="hidden" class="produtoData-<%=produto.getId()%>" name="unidade[]" maxlength="3000" value="<%=produto.getUnidade().getAbreviacao()%>" <%=(produtoHasPedido.getQuantidade() > 0) ? "" : "disabled"%> />
+                        </td>
+                        <td>
+                            <output id="produtoTotal-<%=produto.getId()%>"></output>
                         </td>
                     </tr>
             <% } %>
             </tbody>
+            <tfoot>
+                <td colspan="4" class="text-end text-bold">Valor Total</td>
+                <td colspan="1" class="text-bold">
+                    <output id="pedidoTotal"></output>
+                </td>
+            </tfoot>
         </table>
     </div>
     <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">
