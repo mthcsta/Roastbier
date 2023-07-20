@@ -74,7 +74,7 @@ public class ProdutoHasPedido {
             conexao = new Conexao().getConexao();
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `Produtos_has_Pedidos` "
-                    + "(produto_id, pedido_numero, quantidade, preco_unitario, unidade)"
+                    + "(Produtos_id, Pedidos_numero, quantidade, preco_unitario, unidade)"
                     + "VALUES (?, ?, ?, ?, ?)");
 
             preparedStatement.setInt(1, this.produtoId);

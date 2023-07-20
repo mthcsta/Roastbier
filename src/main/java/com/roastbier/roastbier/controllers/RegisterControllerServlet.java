@@ -118,7 +118,7 @@ public class RegisterControllerServlet extends BaseServlet {
         Date dataEmissao = Date.valueOf(request.getParameter("dataEmissao"));
         Date dataEntrega = Date.valueOf(request.getParameter("dataEntrega"));
         Float valorFrete = Float.parseFloat(request.getParameter("valorFrete"));
-        int clienteId = Integer.parseInt(request.getParameter("clientId"));
+        int clienteId = Integer.parseInt(request.getParameter("clienteId"));
     
         Pedido pedido = new Pedido(dataEmissao, dataEntrega, valorFrete, clienteId);
         pedido.novo();

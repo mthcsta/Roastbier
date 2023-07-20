@@ -12,6 +12,7 @@ public class Pedido {
     private Date dataEntrega;
     private Float valorFrete;
     private int clienteId;
+    private Cliente cliente;
 
     public Pedido(Date dataEmissao, Date dataEntrega, Float valorFrete, int clienteId) {
         this.dataEmissao = dataEmissao;
@@ -49,6 +50,14 @@ public class Pedido {
         return clienteId;
     }
 
+    public Cliente getCliente() {
+        if (cliente == null) {
+            this.cliente = new Cliente(clienteId);
+            this.cliente.selecionarPorId();
+        }
+        return cliente;
+    }
+
     // Setters
     public void setNumero(int numero) {
         this.numero = numero;
@@ -70,6 +79,9 @@ public class Pedido {
         this.clienteId = clienteId;
     }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     
     public void novo() throws Exception{
         Connection conexao = null;
@@ -78,7 +90,7 @@ public class Pedido {
             conexao = new Conexao().getConexao();
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `pedidos` "
-                    + "(data_emissao, data_entrega, valor_frete, cliente_id)"
+                    + "(data_emissao, data_entrega, valor_frete, Clientes_id)"
                     + "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setDate(1, this.dataEmissao);
@@ -117,7 +129,7 @@ public class Pedido {
             conexao = new Conexao().getConexao();
 
             preparedStatement = conexao.prepareStatement("UPDATE `pedidos` "
-            + "SET numero = ?, data_emissao = ?, data_entrega = ?, valor_frete = ?, cliente_id = ? "
+            + "SET numero = ?, data_emissao = ?, data_entrega = ?, valor_frete = ?, Clientes_id = ? "
             + "WHERE numero = ?");
 
             preparedStatement.setDate(1, this.dataEmissao);
@@ -145,35 +157,39 @@ public class Pedido {
         }
     }
 
-    public static Usuario[] Listar(String search) throws Exception {
+    public static Pedido[] Listar(String search) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<Usuario> lista = new ArrayList();
+        List<Pedido> lista = new ArrayList();
 
         try {
             conexao = new Conexao().getConexao();
-            preparedStatement = conexao.prepareStatement("select cpf, nome, data_nascimento, email, telefone, whats, Username, Senha from usuarios WHERE nome LIKE CONCAT( '%',?,'%')");
+            StringBuilder sqlBuilder = new StringBuilder("select numero, data_emissao, valor_frete, data_entrega, Clientes_id from pedidos ");
 
-            preparedStatement.setString(1, search);
+            if (search != null && search.length() > 0) {
+                sqlBuilder.append("WHERE numero = ?");
+            }
+
+            preparedStatement = conexao.prepareStatement(sqlBuilder.toString());
+
+            if (search != null && search.length() > 0) {
+                preparedStatement.setString(1, search);
+            }
 
             rs = preparedStatement.executeQuery();
 
-            /*
             while (rs.next()) {
-                Usuario user = new Usuario(
-                        rs.getString("cpf"),
-                        rs.getString("nome"),
-                        Date.parse(rs.getString("data_nascimento")),
-                        rs.getString("email"),
-                        rs.getString("telefone"),
-                        Boolean.parseBoolean(rs.getString("whats")),
-                        rs.getString("Username"),
-                        rs.getString("Senha")
+                Pedido order = new Pedido(
+                    rs.getInt("numero"),
+                    rs.getDate("data_emissao"),
+                    rs.getDate("data_entrega"),
+                    rs.getFloat("valor_frete"),
+                    rs.getInt("Clientes_id")
                 );
-                lista.add(user);
+                System.out.println(order);
+                lista.add(order);
             }
-             */
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -190,8 +206,7 @@ public class Pedido {
             }
         }
 
-        return lista.toArray(new Usuario[0]);
-
+        return lista.toArray(new Pedido[0]);
     }
 
     public static boolean Deletar(String[] ids) throws Exception {

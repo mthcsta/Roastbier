@@ -24,6 +24,10 @@ public class Cliente {
     private String estado;
     private String cep;
 
+    public Cliente(int id) {
+        this.id = id;
+    }
+
     public Cliente(String cpf, String nome, Date dataNascimento, String rg, String orgaoEmissor,
             String email, String telefone, Boolean whats, String logradouro, String numero, String bairro,
             String cidade, String estado, String cep) {
@@ -275,6 +279,53 @@ public class Cliente {
         }
     }
 
+    public void selecionarPorId() {
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            conexao = new Conexao().getConexao();
+            preparedStatement = conexao.prepareStatement("select id, nome, data_nascimento, cpf, rg, orgao_emissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep from clientes WHERE id = ?");
+
+            preparedStatement.setInt(1, this.id);
+
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                this.setCpf(rs.getString("cpf"));
+                this.setNome(rs.getString("nome"));
+                this.setDataNascimento(rs.getDate("data_nascimento"));
+                this.setRg(rs.getString("rg"));
+                this.setOrgaoEmissor(rs.getString("orgao_emissor"));
+                this.setEmail(rs.getString("email"));
+                this.setTelefone(rs.getString("telefone"));
+                this.setWhats(Boolean.parseBoolean(rs.getString("whats")));
+                this.setLogradouro(rs.getString("logradouro"));
+                this.setNumero(rs.getString("numero"));
+                this.setBairro(rs.getString("bairro"));
+                this.setCidade(rs.getString("cidade"));
+                this.setEstado(rs.getString("estado"));
+                this.setCep(rs.getString("cep"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexao != null) {
+                    conexao.close();
+                }
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
     public static Cliente[] Listar(String search) throws Exception {
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
@@ -293,20 +344,20 @@ public class Cliente {
             while (rs.next()) {
                 System.out.println(rs.getInt("id"));
                 Cliente client = new Cliente(
-                        rs.getInt("id"), 
+                        rs.getInt("id"),
                         rs.getString("cpf"),
                         rs.getString("nome"),
                         rs.getDate("data_nascimento"),
                         rs.getString("rg"),
-                        rs.getString("orgao_emissor"), 
-                        rs.getString("email"), 
-                        rs.getString("telefone"), 
-                        Boolean.parseBoolean(rs.getString("whats")), 
-                        rs.getString("logradouro"), 
-                        rs.getString("numero"), 
-                        rs.getString("bairro"), 
-                        rs.getString("cidade"), 
-                        rs.getString("estado"), 
+                        rs.getString("orgao_emissor"),
+                        rs.getString("email"),
+                        rs.getString("telefone"),
+                        Boolean.parseBoolean(rs.getString("whats")),
+                        rs.getString("logradouro"),
+                        rs.getString("numero"),
+                        rs.getString("bairro"),
+                        rs.getString("cidade"),
+                        rs.getString("estado"),
                         rs.getString("cep")
                 );
                 System.out.println(client);
