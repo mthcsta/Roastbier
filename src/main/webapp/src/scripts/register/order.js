@@ -16,7 +16,7 @@ $(document).ready(function(){
             return produtoPreco * quantidade
         }).reduce((acc, val) => acc + val, 0);
 
-        $("#pedidoTotal").html(new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(pedidoTotal))
+        $("#pedidoTotal").html(new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(pedidoTotal + parseFloat($("#valorFrete").val())));
     }
 
     $(document).on('keyup', ".produto-quantidade", calculaPedidoTotal);
