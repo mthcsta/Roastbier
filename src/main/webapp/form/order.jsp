@@ -38,7 +38,7 @@
         <label for="clienteId">Client:</label>
         <select name="clienteId" id="clienteId">
             <% for(Cliente cliente : Cliente.Listar("")) { %>
-                <option value="<%=cliente.getId()%>" <%=(cliente.getId() == pedido.getClientId()) ? "selected" : "" %>><%=cliente.getNome()%></option>
+                <option value="<%=cliente.getId()%>" <%=(cliente.getId() == pedido.getClienteId()) ? "selected" : "" %>><%=cliente.getNome()%></option>
             <% } %>
         </select>
     </div>
