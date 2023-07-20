@@ -92,27 +92,21 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public void novo() throws Exception{
+    public boolean hasUser() throws Exception{
         Connection conexao = null;
         PreparedStatement preparedStatement = null;
-        try {
-            conexao = new Conexao().getConexao();
 
-            preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
-                    + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
+        try{
+            conexao = new Conexao().getConexao();   
+            preparedStatement = conexao.prepareStatement("select Username from usuarios WHERE Username = ? or email = ?");
+            preparedStatement.setString(1, this.getUsuario());
+            preparedStatement.setString(2, this.getEmail());
+            
+            ResultSet rs = preparedStatement.executeQuery();
 
-            preparedStatement.setString(1, this.cpf);
-            preparedStatement.setString(2, this.nome);
-            preparedStatement.setDate(3, this.dataNascimento);
-            preparedStatement.setString(4, this.email);
-            preparedStatement.setString(5, this.telefone);
-            preparedStatement.setBoolean(6, this.whats);
-            preparedStatement.setString(7, this.usuario);
-            preparedStatement.setString(8, this.senha);
+            return (rs.next());
 
-            preparedStatement.execute();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         } finally {
@@ -123,11 +117,57 @@ public class Usuario {
                 if (conexao != null) {
                     conexao.close();
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw e;
             }
         }
+    }
+
+    public void novo() throws Exception{
+        Connection conexao = null;
+        PreparedStatement preparedStatement = null;
+
+        boolean hasUser = hasUser();
+
+        if(!hasUser){
+            try {
+                conexao = new Conexao().getConexao();
+    
+                preparedStatement = conexao.prepareStatement("INSERT INTO `usuarios` "
+                        + "(cpf, nome, data_nascimento, email, telefone, whats, Username, Senha)"
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, md5(?))");
+    
+                preparedStatement.setString(1, this.cpf);
+                preparedStatement.setString(2, this.nome);
+                preparedStatement.setDate(3, this.dataNascimento);
+                preparedStatement.setString(4, this.email);
+                preparedStatement.setString(5, this.telefone);
+                preparedStatement.setBoolean(6, this.whats);
+                preparedStatement.setString(7, this.usuario);
+                preparedStatement.setString(8, this.senha);
+    
+                preparedStatement.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw e;
+            } finally {
+                try {
+                    if (preparedStatement != null) {
+                        preparedStatement.close();
+                    }
+                    if (conexao != null) {
+                        conexao.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    throw e;
+                }
+            }
+        }else{
+            throw new Exception("Username or Email already used!");
+        }
+        
     }
 
     public void atualizar() throws Exception {
