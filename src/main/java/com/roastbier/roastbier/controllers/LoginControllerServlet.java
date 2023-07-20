@@ -20,16 +20,17 @@ public class LoginControllerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String userCPF = Usuario.autenticar(request.getParameter("username"), request.getParameter("password"));
+            Usuario user = Usuario.autenticar(request.getParameter("username"), request.getParameter("password"));
 
             response.setContentType("application/json");
 
-            if (userCPF == null) {
+            if (user == null) {
                 response.getWriter().print("{ \"success\": 0, \"message\": \"Username or password invalid\" }");
                 return;
             }
 
-            request.getSession().setAttribute("cpf", userCPF);
+            request.getSession().setAttribute("nome", user.getNome());
+            request.getSession().setAttribute("cpf", user.getCpf());
 
             response.getWriter().print("{ \"success\": 1, \"message\": \"Sign in with success\" }");
 

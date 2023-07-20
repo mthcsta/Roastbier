@@ -3,6 +3,14 @@
     <div class="sidebar-sticky">
 
         <ul class="nav flex-column">
+            <%
+                if (request.getSession().getAttribute("cpf") != null) {
+            %>
+            <li class="nav-item">
+                <div class="p-1">Welcome, <%=request.getSession().getAttribute("nome")%></div>
+            </li>
+            <% } %>
+
             <li class="nav-item">
                 <a class="nav-link active" href="<%=System.getProperty("BASE_URL")%>/">
                     <i class="fa-solid fa-beer-mug-empty pe-3"></i>
