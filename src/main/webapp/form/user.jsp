@@ -50,7 +50,7 @@
     <br>
     <div>
         <label for="senha"><%=((boolean) request.getAttribute("update")) ? "New Password" : "Password" %>:</label>
-        <input type="text" id="senha" name="senha" maxlength="255" <%=((boolean) request.getAttribute("update")) ? "" : "required" %>>
+        <input type="password" id="senha" name="senha" maxlength="255" <%=((boolean) request.getAttribute("update")) ? "" : "required" %>>
     </div>
     <br>
     <input type="submit" value="<%=((boolean) request.getAttribute("update")) ? "Update" : "Insert" %>" class="btn btn-primary">

@@ -3,7 +3,7 @@
 <%
     Cliente client = new Cliente();
     if(request.getParameter("id") != null){
-        client.setNumero(request.getParameter("id"));
+        client.setId(Integer.parseInt(request.getParameter("id")));
         client.selecionarPorId();
     }
 %>
@@ -14,7 +14,7 @@
 
     <input type="hidden" name="isUpdate" value="<%=request.getAttribute("update")%>">
     <div>
-        <input type="text" id="id" value="<%=client.getId()%>" hidden>
+        <input type="text" name="id" value="<%=client.getId()%>" hidden>
     </div>
     <div>
         <label for="nome">Name:</label>
