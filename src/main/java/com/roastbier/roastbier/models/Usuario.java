@@ -235,23 +235,32 @@ public class Usuario {
             }
     }
 
-    public static String autenticar(String usuario, String senha) throws Exception {
+    public static Usuario autenticar(String usuario, String senha) throws Exception {
         PreparedStatement preparedStatement = null;
         try {
             Connection conexao = Conexao.GetConexao();
 
-            preparedStatement = conexao.prepareStatement("SELECT cpf FROM usuarios WHERE Username = ? AND Senha = md5(?)");
+            preparedStatement = conexao.prepareStatement("SELECT cpf, nome, data_nascimento, email, telefone, whats, Username, Senha FROM usuarios WHERE Username = ? AND Senha = md5(?)");
 
             preparedStatement.setString(1, usuario);
             preparedStatement.setString(2, senha);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
 
-            if (!resultSet.next()) {
+            if (!rs.next()) {
                 return null;
             }
 
-            return resultSet.getString(1);
+            return new Usuario(
+                    rs.getString("cpf"),
+                    rs.getString("nome"),
+                    rs.getDate("data_nascimento"),
+                    rs.getString("email"),
+                    rs.getString("telefone"),
+                    rs.getBoolean("whats"),
+                    rs.getString("Username"),
+                    rs.getString("Senha")
+            );
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
