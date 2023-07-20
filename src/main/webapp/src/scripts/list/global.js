@@ -20,7 +20,12 @@ $(document).ready(function() {
     });
 
     $("#btn-delete").on("click", function() {
-        $(".select_row").serializeArray();
+        const selectedRows = $(".select_row").serializeArray();
+        const url = new URLSearchParams(window.location.search);
+        selectedRows.forEach((selectedRow) => {
+            url.append('delete[]', selectedRow.value);
+        })
+        redirect('/delete?' + url.toString());
     });
 
     $("#btn-filter").on('click', function() {

@@ -308,7 +308,7 @@ public class Usuario {
 
             System.out.println(preparedStatement.toString());
 
-            //preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
             return true;
 

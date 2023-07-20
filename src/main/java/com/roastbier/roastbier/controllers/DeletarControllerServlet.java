@@ -7,21 +7,26 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "DeletarControllerServlet", value = "/deletar")
+@WebServlet(name = "DeletarControllerServlet", value = "/delete")
 public class DeletarControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String model = request.getParameter("model");
+        String model = request.getParameter("m");
         String[] delete = request.getParameterValues("delete[]");
 
         try {
             System.out.println("MMMM");
             getListByModel(model, delete);
+            request.setAttribute("message", "Registros removido com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
+            request.setAttribute("error", true);
+            request.setAttribute("message", "Registros removido com sucesso!");
+        } finally {
+            request.setAttribute("message", "Registros removido com sucesso!");
+            RequestDispatcher rd=request.getRequestDispatcher("results.jsp");
+            rd.forward(request, response);
         }
-        response.getWriter().print("DELETADO");
-
     }
 
     private boolean getListByModel(String model, String[] ids) throws Exception {

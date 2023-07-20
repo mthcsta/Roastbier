@@ -20,7 +20,11 @@
 
           <div class="box">
             <p><%=request.getAttribute("message")%></p>
-            <button class="btn-insert" onclick="window.location.href = 'search.html';">Back</button>
+            <% if (request.getAttribute("error") == null) { %>
+            <a class="btn btn-secondary" href="<%=System.getProperty("BASE_URL")%>/list?m=<%=request.getParameter("m")%>">Back</a>
+            <% } else { %>
+            <a class="btn btn-secondary" href="javascript:history.back();">Back</a>
+            <% } %>
           </div>
 
         </div>
