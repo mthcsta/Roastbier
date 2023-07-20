@@ -12,7 +12,7 @@ $(document).ready(function() {
             },
             { title: 'CPF', data: 'cpf' },
             { title: 'Name', data: 'nome' },
-            { title: 'Birthday', data: 'nome' },
+            { title: 'Birthday', data: 'dataNascimento' },
             { title: 'Email', data: 'email' },
             { title: 'Telephone', data: 'telefone' },
             {
