@@ -272,7 +272,7 @@ public class Pedido {
 
         try {
             Connection conexao = Conexao.GetConexao();
-            preparedStatement = conexao.prepareStatement("select numero, data_emissao, data_entrega, valor_frete, Cliente_id from clientes WHERE numero = ?");
+            preparedStatement = conexao.prepareStatement("select numero, data_emissao, valor_frete, data_entrega, Clientes_id from pedidos WHERE numero = ?");
 
             preparedStatement.setInt(1, this.getNumero());
 
@@ -282,7 +282,7 @@ public class Pedido {
                 this.setDataEmissao(rs.getDate("data_emissao"));
                 this.setDataEntrega(rs.getDate("data_entrega"));
                 this.setValorFrete(rs.getFloat("valor_frete"));
-                this.setClienteId((rs.getInt("Cliente_id")));
+                this.setClienteId((rs.getInt("Clientes_id")));
             }
 
         } catch (Exception e) {
