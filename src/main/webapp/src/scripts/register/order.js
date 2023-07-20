@@ -1,9 +1,9 @@
 $(document).ready(function(){
     $(".produtoId").on("click", function(){
         let id = $(this).val();
-        $("#quantidade-" + id).removeAttr("disabled");
+        $(`.produtoData-${id}`).attr("disabled", !$(this).is(":checked"));
     })
-})
+});
 
 function validar() {
 

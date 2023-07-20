@@ -5,7 +5,6 @@ $(document).ready(function() {
     });
 
     const updateUrl = $("#btn-update").attr("href");
-    $("#btn-update").attr("href", "javascript:alert('Você precisa selecionar um registro');");
 
     $("#btn-update").on("click", function(){
         if ($(".select_row:checked").length == 0) {

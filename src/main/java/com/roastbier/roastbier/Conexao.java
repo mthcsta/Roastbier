@@ -19,8 +19,12 @@ public class Conexao {
     }
 
     public Connection getConexao() {
-        if (connection == null) {
-            startConnection();
+        try {
+            if (connection == null || connection.isClosed()) {
+                startConnection();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return connection;
     }
