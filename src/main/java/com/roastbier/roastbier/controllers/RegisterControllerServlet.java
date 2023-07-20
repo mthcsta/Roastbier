@@ -122,13 +122,20 @@ public class RegisterControllerServlet extends BaseServlet {
         Pedido pedido = new Pedido(dataEmissao, dataEntrega, valorFrete, clienteId);
         pedido.novo();
 
-        int produtoId 
-        int pedidoNumero 
-        int quantidade
-        float precoUnitario
-        String unidade
+        String[] produtosId = request.getParameterValues("produtoId[]");
+        String[] produtosQTD = request.getParameterValues("quantidade[]");
+        String[] produtosPreco = request.getParameterValues("preco[]");
+        String[] produtosUnidade = request.getParameterValues("unidade[]");
 
-        ProdutoHasPedido produtoHasPedido = new ProdutoHasPedido()
+        for(int indice = 0; indice < produtosId.length; indice ++){
+            ProdutoHasPedido produtoHasPedido = new ProdutoHasPedido();
+            produtoHasPedido.setProdutoId(Integer.parseInt(produtosId[indice]));
+            produtoHasPedido.setPedidoNumero(pedido.getNumero());
+            produtoHasPedido.setQuantidade(Integer.parseInt(produtosQTD[indice]));
+            produtoHasPedido.setPrecoUnitario(Float.parseFloat(produtosPreco[indice]));
+            produtoHasPedido.setUnidade(UnidadeMedida.getByAbreviacao(produtosUnidade[indice]));
+            produtoHasPedido.novo();
+        }
 
         return true;
     } 

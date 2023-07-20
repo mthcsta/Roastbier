@@ -1,6 +1,7 @@
 package com.roastbier.roastbier.models;
 
 import com.roastbier.roastbier.Conexao;
+import com.roastbier.roastbier.enums.UnidadeMedida;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,14 +11,18 @@ public class ProdutoHasPedido {
     private int pedidoNumero;
     private int quantidade;
     private float precoUnitario;
-    private String unidade;
+    private UnidadeMedida unidade;
 
-    public ProdutoHasPedido(int produtoId, int pedidoNumero, int quantidade, float precoUnitario, String unidade) {
+    public ProdutoHasPedido(int produtoId, int pedidoNumero, int quantidade, float precoUnitario, UnidadeMedida unidade) {
         this.produtoId = produtoId;
         this.pedidoNumero = pedidoNumero;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
         this.unidade = unidade;
+    }
+
+    public ProdutoHasPedido(){
+
     }
 
         // Getters
@@ -37,7 +42,7 @@ public class ProdutoHasPedido {
             return precoUnitario;
         }
     
-        public String getUnidade() {
+        public UnidadeMedida getUnidade() {
             return unidade;
         }
     
@@ -58,7 +63,7 @@ public class ProdutoHasPedido {
             this.precoUnitario = precoUnitario;
         }
     
-        public void setUnidade(String unidade) {
+        public void setUnidade(UnidadeMedida unidade) {
             this.unidade = unidade;
         }
 
@@ -76,7 +81,7 @@ public class ProdutoHasPedido {
             preparedStatement.setInt(2, this.pedidoNumero);
             preparedStatement.setInt(3, this.quantidade);
             preparedStatement.setFloat(4, this.precoUnitario);
-            preparedStatement.setString(5, this.unidade);
+            preparedStatement.setString(5, this.unidade.getAbreviacao());
 
             preparedStatement.execute();
         } catch (SQLException e) {

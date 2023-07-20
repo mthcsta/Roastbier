@@ -1,3 +1,10 @@
+$(document).ready(function(){
+    $(".produtoId").on("click", function(){
+        let id = $(this).val();
+        $("#quantidade-" + id).removeAttr("disabled");
+    })
+})
+
 function validar() {
 
     var retorno = true;

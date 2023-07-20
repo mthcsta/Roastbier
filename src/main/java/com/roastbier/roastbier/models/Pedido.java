@@ -79,14 +79,19 @@ public class Pedido {
 
             preparedStatement = conexao.prepareStatement("INSERT INTO `pedidos` "
                     + "(data_emissao, data_entrega, valor_frete, cliente_id)"
-                    + "VALUES (?, ?, ?, ?)");
+                    + "VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setDate(1, Date.valueOf(this.dataEmissao));
-            preparedStatement.setDate(2, Date.valueOf(this.dataEntrega));
+            preparedStatement.setDate(1, this.dataEmissao);
+            preparedStatement.setDate(2, this.dataEntrega);
             preparedStatement.setFloat(3, this.valorFrete);
             preparedStatement.setInt(4, this.clienteId);
 
             preparedStatement.execute();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                this.setNumero(resultSet.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,8 +118,8 @@ public class Pedido {
             + "SET numero = ?, data_emissao = ?, data_entrega = ?, valor_frete = ?, cliente_id = ? "
             + "WHERE numero = ?");
 
-            preparedStatement.setDate(1, Date.valueOf(this.dataEmissao));
-            preparedStatement.setDate(2, Date.valueOf(this.dataEntrega));
+            preparedStatement.setDate(1, this.dataEmissao);
+            preparedStatement.setDate(2, this.dataEntrega);
             preparedStatement.setFloat(3, this.valorFrete);
             preparedStatement.setInt(4, this.clienteId);
             preparedStatement.setInt(5, this.numero);

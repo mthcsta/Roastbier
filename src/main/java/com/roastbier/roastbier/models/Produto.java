@@ -30,6 +30,10 @@ public class Produto {
         this.precoUnitario = precoUnitario;
     }
 
+    public Produto(){
+
+    }
+
      // Getters
      public int getId() {
         return id;
@@ -45,6 +49,10 @@ public class Produto {
 
     public UnidadeMedida getUnidade() {
         return unidade;
+    }
+
+    public String getUnidadeString() {
+        return unidade.getAbreviacao();
     }
 
     public float getPrecoUnitario() {
