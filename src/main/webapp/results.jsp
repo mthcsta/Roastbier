@@ -20,7 +20,7 @@
 
           <div class="box">
             <p><%=request.getAttribute("message")%></p>
-            <button class="btn-insert" onclick="window.location.href = 'search.html';">Back to search page</button>
+            <button class="btn-insert" onclick="window.location.href = 'search.html';">Back</button>
           </div>
 
         </div>

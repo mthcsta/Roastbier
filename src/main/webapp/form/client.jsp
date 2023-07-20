@@ -1,4 +1,4 @@
-<form id="myForm" onsubmit="return validar();">
+<form id="myForm" method="POST" action="<%=System.getProperty("BASE_URL")%>/register?m=client" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
@@ -23,6 +23,11 @@
     <div>
         <label for="rg">RG:</label>
         <input type="text" id="rg" name="rg" maxlength="15" required>
+    </div>
+    <br>
+    <div>
+        <label for="orgaoEmissor">Issuing Agency:</label>
+        <input type="text" id="orgaoEmissor" name="orgaoEmissor" maxlength="20">
     </div>
     <br>
     <div>
@@ -58,18 +63,19 @@
     <br>
     <div>
         <label for="bairro">Neighborhood:</label>
-        <input type="number" id="bairro" name="bairro" maxlength="100">
+        <input type="text" id="bairro" name="bairro" maxlength="100">
     </div>
     <br>
     <div>
         <label for="cidade">City:</label>
-        <input type="number" id="cidade" name="cidade" maxlength="100">
+        <input type="text" id="cidade" name="cidade" maxlength="100">
     </div>
     <br>
     <div>
         <label for="estado">State:</label>
-        <input type="number" id="estado" name="estado" maxlength="2">
+        <input type="text" id="estado" name="estado" maxlength="2">
     </div>
     <br>
+    <input type="submit" value="insert" class="btn btn-primary">
 </form>
 <script src="src/scripts/register/client.js" language="javascript" type="text/javascript"></script>

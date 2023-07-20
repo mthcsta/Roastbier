@@ -3,18 +3,24 @@ package com.roastbier.roastbier.models;
 import com.roastbier.roastbier.Conexao;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
     private int numero;
-    private LocalDate dataEmissao;
-    private LocalDate dataEntrega;
+    private Date dataEmissao;
+    private Date dataEntrega;
     private Float valorFrete;
     private int clienteId;
 
-    public Pedido(int numero, LocalDate dataEmissao, LocalDate dataEntrega, Float valorFrete, int clienteId) {
+    public Pedido(Date dataEmissao, Date dataEntrega, Float valorFrete, int clienteId) {
+        this.dataEmissao = dataEmissao;
+        this.dataEntrega = dataEntrega;
+        this.valorFrete = valorFrete;
+        this.clienteId = clienteId;
+    }
+
+    public Pedido(int numero, Date dataEmissao, Date dataEntrega, Float valorFrete, int clienteId) {
         this.numero = numero;
         this.dataEmissao = dataEmissao;
         this.dataEntrega = dataEntrega;
@@ -27,11 +33,11 @@ public class Pedido {
         return numero;
     }
 
-    public LocalDate getDataEmissao() {
+    public Date getDataEmissao() {
         return dataEmissao;
     }
 
-    public LocalDate getDataEntrega() {
+    public Date getDataEntrega() {
         return dataEntrega;
     }
 
@@ -48,11 +54,11 @@ public class Pedido {
         this.numero = numero;
     }
 
-    public void setDataEmissao(LocalDate dataEmissao) {
+    public void setDataEmissao(Date dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
 
-    public void setDataEntrega(LocalDate dataEntrega) {
+    public void setDataEntrega(Date dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 
@@ -149,7 +155,7 @@ public class Pedido {
                 Usuario user = new Usuario(
                         rs.getString("cpf"),
                         rs.getString("nome"),
-                        LocalDate.parse(rs.getString("data_nascimento")),
+                        Date.parse(rs.getString("data_nascimento")),
                         rs.getString("email"),
                         rs.getString("telefone"),
                         Boolean.parseBoolean(rs.getString("whats")),

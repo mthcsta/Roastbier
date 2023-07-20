@@ -1,5 +1,5 @@
 <%@ page import="com.roastbier.roastbier.enums.UnidadeMedida" %>
-<form id="myForm" onsubmit="return validar();">
+<form id="myForm" method="POST" action="<%=System.getProperty("BASE_URL")%>/register?m=product" onsubmit="return validar();">
 
     <ul id="erros" style="color: #FF0000;"></ul>
 
@@ -32,5 +32,6 @@
         <label for="precoUnitario">Unity Price:</label>
         <input type="number" name="precoUnitario" id="precoUnitario" required>
     </div>
+    <input type="submit" value="insert" class="btn btn-primary">
 </form>
 <script src="src/scripts/register/product.js" language="javascript" type="text/javascript"></script>

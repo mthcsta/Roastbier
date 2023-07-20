@@ -12,7 +12,7 @@ public class ProdutoHasPedido {
     private float precoUnitario;
     private String unidade;
 
-     public ProdutoHasPedido(int produtoId, int pedidoNumero, int quantidade, float precoUnitario, String unidade) {
+    public ProdutoHasPedido(int produtoId, int pedidoNumero, int quantidade, float precoUnitario, String unidade) {
         this.produtoId = produtoId;
         this.pedidoNumero = pedidoNumero;
         this.quantidade = quantidade;

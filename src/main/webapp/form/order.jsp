@@ -26,5 +26,6 @@
         <label for="clienteId">Client ID:</label>
         <input type="number" id="clienteId" name="clienteId" maxlength="15" required>
     </div>
+    
 </form>
 <script src="src/scripts/register/order.js" language="javascript" type="text/javascript"></script>

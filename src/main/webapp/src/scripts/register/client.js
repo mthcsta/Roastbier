@@ -1,5 +1,12 @@
 $(document).ready(function(){
-
+  $('#dataNascimento').on('input', function() {
+    var data = $(this).val();
+    if (data.length === 10) {
+      $(this).mask('0000-00-00', {reverse: false});
+    } else {
+      $(this).mask('0000-00-00?9', {reverse: false});
+    }
+  });
 });
 
 function viaCep(){
@@ -41,6 +48,13 @@ function validar() {
         }
     }
 
+    // validação de data
+    if ($("#dataNascimento").val() == ""){
+        retorno = erroValidacao("Please fill the Date field.", "#dataNascimento");
+    }else{
+        $("#dataNascimento").css("background-color","");
+    }
+
     // validação de cpf
     var cpf = $("#cpf").val();
     if(!validarCPF(cpf)){
@@ -49,11 +63,11 @@ function validar() {
         $("#cpf").css("background-color","");
     }
 
-    // validação de data
-    if ($("#dataNascimento").val() == ""){
-        retorno = erroValidacao("Please fill the Date field.", "#dataNascimento");
+    // validação de rg
+    if($("#rg").val() > 15 || $("#rg").val() == ""){
+        retorno = erroValidacao("Invalid RG", "#rg")
     }else{
-        $("#dataNascimento").css("background-color","");
+        $("#rg").css("background-color","");
     }
 
     // validação email
@@ -68,18 +82,7 @@ function validar() {
 
     // Se a página foi validada com sucesso, muda para a página de success.
 
-    if (retorno) {
-      $.ajax({
-        url: "/user/register",
-        type:"POST",
-        data:$('form').serialize(),
-        success : function(data) {
-          console.log(data);
-          redirect("/success.jsp");
-        }
-      })
-
-    }else{
+    if (!retorno) {
       alert("retorno false");
     }
 

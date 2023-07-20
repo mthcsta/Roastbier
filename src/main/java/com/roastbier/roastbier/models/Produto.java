@@ -15,6 +15,13 @@ public class Produto {
     private UnidadeMedida unidade;
     private float precoUnitario;
 
+    public Produto(String nome, String descricao, UnidadeMedida unidade, float precoUnitario) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.unidade = unidade;
+        this.precoUnitario = precoUnitario;
+    }
+
     public Produto(int id, String nome, String descricao, UnidadeMedida unidade, float precoUnitario) {
         this.id = id;
         this.nome = nome;
