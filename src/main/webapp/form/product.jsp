@@ -23,7 +23,7 @@
         <br>
         <select id="unidade" name="unidade" maxlength="255" required>
             <% for (UnidadeMedida unidadeMedida : UnidadeMedida.values()) { %>
-                <option value="<%=unidadeMedida.getAbreviacao()%>>"><%=unidadeMedida.getUnidade()%>></option>
+                <option value="<%=unidadeMedida.getAbreviacao()%>"><%=unidadeMedida.getUnidade()%></option>
             <% } %>
         </select>
     </div>
