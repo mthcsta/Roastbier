@@ -3,7 +3,7 @@
 <%
     Cliente client = new Cliente();
     if(request.getParameter("id") != null){
-        client.setNumero(request.getParameter("id"));
+        client.setId(Integer.parseInt(request.getParameter("id")));
         client.selecionarPorId();
     }
 %>

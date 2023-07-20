@@ -104,7 +104,12 @@ public class RegisterControllerServlet extends BaseServlet {
     
         Cliente client = new Cliente(cpf, nome, data, rg, orgaoEmissor, email, telefone, whats, logradouro, numero, bairro, cidade, estado, cep);
 
-        client.novo();
+        if(request.getParameter("isUpdate").equals("true")) {
+            client.setId(Integer.parseInt(request.getParameter("id")));
+            client.atualizar();
+        } else {
+            client.novo();
+        }
 
         return true;
     } 

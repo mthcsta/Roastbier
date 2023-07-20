@@ -45,13 +45,15 @@
     <br>
     <div>
         <label for="produtoId">Product</label>
-        <table class="table">
+        <table class="table table-striped">
             <thead>
-                <th>Select</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <tr>
+                    <th>Select</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
             </thead>
             <tbody>
             <%

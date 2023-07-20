@@ -218,15 +218,15 @@ public class Cliente {
                 sql = "SELECT cpf FROM clientes WHERE cpf = ?";
             } else {
                 sql = "SELECT cpf FROM clientes WHERE cpf = ?  AND id != ?";
-            };
+            }
 
-            preparedStatement = conexao.prepareStatement(sql);;
+            preparedStatement = conexao.prepareStatement(sql);
             preparedStatement.setString(1, this.getCpf());
             
             if (id != 0) {
                 preparedStatement.setInt(2, this.getId());
             }
-    
+
             ResultSet rs = preparedStatement.executeQuery();
     
             return rs.next();
@@ -295,6 +295,10 @@ public class Cliente {
 
         try {
             Connection conexao = Conexao.GetConexao();
+
+            if (hasClientCpf(this.id)) {
+                throw new Exception("Cpf already registered.");
+            }
 
             preparedStatement = conexao.prepareStatement("UPDATE `clientes` "
                     + "SET nome = ?, data_nascimento = ?, rg = ?, orgao_emissor = ?, email = ?, telefone = ?, whats = ?, logradouro = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ? "
