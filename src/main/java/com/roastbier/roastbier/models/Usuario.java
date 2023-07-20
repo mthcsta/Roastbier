@@ -29,7 +29,14 @@ public class Usuario {
     }
 
     public Usuario() {
-
+        this.cpf = "";
+        this.nome = "";
+        this.dataNascimento = null;
+        this.email = "";
+        this.telefone = "";
+        this.whats = false;
+        this.usuario = "";
+        this.senha = "";
     }
 
     public String getCpf() {
