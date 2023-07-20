@@ -14,7 +14,7 @@
 
     <input type="hidden" name="isUpdate" value="<%=request.getAttribute("update")%>">
     <div>
-        <input type="text" id="id" value="<%=client.getId()%>" hidden>
+        <input type="text" name="id" id="id" value="<%=client.getId()%>" hidden>
     </div>
     <div>
         <label for="nome">Name:</label>
