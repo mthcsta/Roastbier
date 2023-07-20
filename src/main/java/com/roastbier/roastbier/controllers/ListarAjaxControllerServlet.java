@@ -1,6 +1,5 @@
 package com.roastbier.roastbier.controllers;
 
-import com.roastbier.roastbier.DatatableSearchFormat;
 import com.roastbier.roastbier.models.Cliente;
 import com.roastbier.roastbier.models.Pedido;
 import com.roastbier.roastbier.models.Produto;

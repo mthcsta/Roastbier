@@ -3,7 +3,6 @@ package com.roastbier.roastbier.models;
 import com.roastbier.roastbier.Conexao;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

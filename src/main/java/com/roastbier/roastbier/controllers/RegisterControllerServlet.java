@@ -2,9 +2,6 @@ package com.roastbier.roastbier.controllers;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-import com.google.protobuf.Message;
-import com.mysql.cj.xdevapi.Client;
 import com.roastbier.roastbier.enums.UnidadeMedida;
 import com.roastbier.roastbier.models.Cliente;
 import com.roastbier.roastbier.models.Pedido;
@@ -15,7 +12,6 @@ import com.roastbier.roastbier.models.Usuario;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
-import java.time.LocalDate;
 
 @Logado()
 @WebServlet(name = "RegisterControllerServlet", value = "/register")
@@ -33,9 +29,9 @@ public class RegisterControllerServlet extends BaseServlet {
         try {
             doRegisterByModel(request.getParameter("m"), request);
             if (request.getParameter("isUpdate").equals("true")) {
-                request.setAttribute("message", "Registro atualizado com sucesso!");
+                request.setAttribute("message", "Registration updated successfully!");
             } else {
-                request.setAttribute("message", "Registro inserido com sucesso!");
+                request.setAttribute("message", "Registration inserted successfully!");
             }
         } catch (Exception e) {
             e.printStackTrace();

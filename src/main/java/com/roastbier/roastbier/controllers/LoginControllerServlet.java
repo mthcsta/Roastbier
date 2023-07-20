@@ -1,8 +1,6 @@
 package com.roastbier.roastbier.controllers;
 
 import com.roastbier.roastbier.models.Usuario;
-import org.codehaus.jackson.map.util.JSONPObject;
-import org.codehaus.jackson.map.util.JSONWrappedObject;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

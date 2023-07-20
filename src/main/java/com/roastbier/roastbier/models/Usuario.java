@@ -1,6 +1,5 @@
 package com.roastbier.roastbier.models;
 
-import com.mysql.cj.util.StringUtils;
 import com.roastbier.roastbier.Conexao;
 
 import java.sql.*;
